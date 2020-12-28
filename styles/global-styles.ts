@@ -23,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
         color: inherit;
     }
     a{
+        cursor: pointer;
         text-decoration: none;
         color: inherit;
     }
@@ -34,6 +35,27 @@ const GlobalStyle = createGlobalStyle`
     textarea{
         font: inherit;
         resize: none;
+    }
+    h1{
+        font-size: 2rem;
+    }
+    h2{
+        font-size: 1.5rem;
+    }
+    h3{
+        font-size: 1.17rem;
+    }
+    h4{
+        font-size: 1rem;
+    }
+    h5{
+        font-size: 0.83rem;
+    }
+    h6{
+        font-size: 0.75rem;
+    }
+    h1, h2, h3, h4, h5, h6{
+        font-weight: bolder;
     }
 `;
 
