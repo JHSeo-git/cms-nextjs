@@ -1,4 +1,14 @@
 import { css } from 'styled-components';
+import { Appearance } from '../../interfaces';
+
+export const ApperanceColor = (appearance: Appearance) => {
+  return css`
+    color: ${(props) =>
+      (appearance === 'primary' && props.theme.PrimaryColor.Color500) ||
+      (appearance === 'secondary' && props.theme.SecondaryColor.Color500) ||
+      (appearance === 'thirdary' && props.theme.ThirdaryColor.Color500)};
+  `;
+};
 
 export const FlexBox = (isCol: boolean = false, isSBP: boolean = false) => {
   const flexBoxCSS = css`

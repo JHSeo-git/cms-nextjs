@@ -1,5 +1,6 @@
 import Document, {
   DocumentContext,
+  Html,
   Head,
   Main,
   NextScript,
@@ -26,7 +27,7 @@ export default class MyDocument extends Document<Props> {
   render() {
     const { styleTags } = this.props;
     return (
-      <html>
+      <Html>
         <Head>
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
@@ -39,7 +40,7 @@ export default class MyDocument extends Document<Props> {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }

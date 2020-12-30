@@ -55,6 +55,11 @@ const Header = () => {
               <Icon icon="home" aria-label="home" />
             </Anchor>
           </Link>
+          <Link href="/about">
+            <Anchor>
+              <Icon icon="book" aria-label="book" />
+            </Anchor>
+          </Link>
         </LeftSide>
         <RightSide>
           <Link href="/about">

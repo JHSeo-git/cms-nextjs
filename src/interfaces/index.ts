@@ -8,3 +8,7 @@ export type User = {
   id: number;
   name: string;
 };
+
+// styles props
+export type Appearance = 'primary' | 'secondary' | 'thirdary';
+export type AlignType = 'left' | 'center' | 'right';
