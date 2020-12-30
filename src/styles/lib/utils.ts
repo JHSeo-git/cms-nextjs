@@ -10,7 +10,7 @@ export const ApperanceColor = (appearance: Appearance) => {
   `;
 };
 
-export const FlexBox = (isCol: boolean = false, isSBP: boolean = false) => {
+export const FlexBox = (isCol = false, isSBP = false) => {
   const flexBoxCSS = css`
     display: flex;
     align-items: center;

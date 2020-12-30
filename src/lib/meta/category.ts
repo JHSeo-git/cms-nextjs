@@ -5,20 +5,20 @@ export type CategoryContent = {
   readonly name: string;
 };
 
-const tagMap: { [key: string]: CategoryContent } = generateTagMap();
+const categoryMap: { [key: string]: CategoryContent } = generateCategoryMap();
 
-function generateTagMap(): { [key: string]: CategoryContent } {
-  let result: { [key: string]: CategoryContent } = {};
+function generateCategoryMap(): { [key: string]: CategoryContent } {
+  const result: { [key: string]: CategoryContent } = {};
   for (const category of categories.category) {
     result[category.slug] = category;
   }
   return result;
 }
 
-export function getTag(slug: string) {
-  return tagMap[slug];
+export function getCategory(slug: string) {
+  return categoryMap[slug];
 }
 
-export function listTags(): CategoryContent[] {
+export function listCategories(): CategoryContent[] {
   return categories.category;
 }

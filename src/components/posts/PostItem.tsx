@@ -1,0 +1,33 @@
+import React from 'react';
+import styled from 'styled-components';
+import { PostContent } from '../../lib/meta/posts';
+
+const Container = styled.div`
+  padding: 0.5rem;
+`;
+
+const Title = styled.h3`
+  font-weight: bold;
+  color: ${(props) => props.theme.PrimaryColor.Color500};
+  margin-bottom: 0.25rem;
+`;
+
+const Date = styled.p`
+  font-size: 0.75rem;
+  color: ${(props) => props.theme.GrayColor.Color600};
+`;
+
+interface Props {
+  post: PostContent;
+}
+
+const PostItem = ({ post }: Props) => {
+  return (
+    <Container>
+      <Title>{post.title}</Title>
+      <Date>{post.date}</Date>
+    </Container>
+  );
+};
+
+export default PostItem;

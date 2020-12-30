@@ -7,7 +7,7 @@ module.exports = withMdxEnhanced({
   rehypePlugins: [rehypePrism],
 })({
   pageExtensions: ['mdx', 'tsx'],
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+  webpack: (config) => {
     config.module.rules.push(
       ...[
         {

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Title from './common/Title';
 
 const Content = styled.p`
+  padding: 0.25rem;
   text-align: center;
   font-size: 1.25rem;
   color: ${(props) => props.theme.GrayColor.Color700};

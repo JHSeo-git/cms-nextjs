@@ -8,7 +8,7 @@ const FooterWrapper = styled.footer`
 `;
 
 const Footer = () => {
-  return <FooterWrapper>I'm here to stay (Footer)</FooterWrapper>;
+  return <FooterWrapper>{`I'm here to stay (Footer)`}</FooterWrapper>;
 };
 
 export default Footer;
