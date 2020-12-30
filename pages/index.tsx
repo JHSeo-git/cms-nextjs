@@ -1,14 +1,9 @@
-import Link from 'next/link';
-import Layout from '../components/Layout';
+import Layout from '../components/base/Layout';
+import Main from '../components/Main';
 
 const IndexPage = () => (
   <Layout title="Home | Next.js + TypeScript Practice">
-    <h1>This Site is cloning GitBook</h1>
-    <p>
-      <Link href="/about">
-        <a>About</a>
-      </Link>
-    </p>
+    <Main />
   </Layout>
 );
 

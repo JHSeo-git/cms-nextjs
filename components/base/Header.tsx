@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { Icon } from '../common/Icon';
-import { BoxShadow } from '../../styles/lib/utils';
+import { BorderLine } from '../../styles/lib/utils';
 
 const HeaderWrapper = styled.header`
   padding: 0 0.5rem;
   width: 100%;
-  ${BoxShadow(1)};
+  border-bottom: ${BorderLine.normal};
 `;
 
 const Nav = styled.nav`

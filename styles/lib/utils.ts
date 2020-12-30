@@ -42,3 +42,7 @@ export const BoxShadow = (level: number) => {
     `;
   }
 };
+
+export const BorderLine = {
+  normal: `1px solid rgba(0,0,0,0.07)`,
+};

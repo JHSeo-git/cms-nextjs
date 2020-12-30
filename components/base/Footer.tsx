@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { BorderLine } from '../../styles/lib/utils';
 
 const FooterWrapper = styled.footer`
-  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  border-top: ${BorderLine.normal};
 `;
 
 const Footer = () => {

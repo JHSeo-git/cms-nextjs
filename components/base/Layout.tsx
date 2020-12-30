@@ -1,9 +1,10 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import Head from 'next/head';
-import Header from './base/Header';
-import Footer from './base/Footer';
-import SideMenu from './base/SideMenu';
+import Header from './Header';
+import Footer from './Footer';
+import SideMenu from './SideMenu';
+import { BorderLine } from '../../styles/lib/utils';
 
 type Props = {
   children?: ReactNode;
@@ -20,7 +21,7 @@ const LeftSide = styled.section`
   max-width: 25rem;
   overflow-y: auto;
   background: #fafafa;
-  border-right: 1px solid rgba(0, 0, 0, 0.07);
+  border-right: ${BorderLine.normal};
 `;
 const RightSide = styled.section`
   height: 100vh;

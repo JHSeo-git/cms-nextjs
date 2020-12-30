@@ -23,13 +23,15 @@ const Path = styled.path`
 export const Icon: FunctionComponent<Props> = ({
   icon,
   block = false,
+  width = '20px',
+  height = '20px',
   ...props
 }: Props) => {
   return (
     <Svg
       viewBox="0 0 1024 1024"
-      width="20px"
-      height="20px"
+      width={width}
+      height={height}
       block={block}
       {...props}
     >
@@ -40,5 +42,7 @@ export const Icon: FunctionComponent<Props> = ({
 
 interface Props {
   icon: keyof typeof icons;
+  width?: string;
+  height?: string;
   block?: boolean;
 }
