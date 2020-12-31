@@ -31,6 +31,7 @@ const RightSide = styled.section`
 `;
 
 const Main = styled.main`
+  padding: 0.5rem;
   flex: 1;
   /* Syntax highlighting */
   .token.comment,

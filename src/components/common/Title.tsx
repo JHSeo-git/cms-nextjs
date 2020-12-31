@@ -9,7 +9,6 @@ interface TextProps {
 }
 
 const Text = styled.h1<TextProps>`
-  padding: 2rem 0;
   text-align: center;
   ${(props) =>
     props.$align === 'left' &&

@@ -1,4 +1,4 @@
-import categories from '../../meta/categories.yml';
+import categories from '../../../meta/categories.yml';
 
 export type CategoryContent = {
   readonly slug: string;

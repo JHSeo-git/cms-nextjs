@@ -8,7 +8,7 @@ const Container = styled.div`
 
 const Title = styled.h3`
   font-weight: bold;
-  color: ${(props) => props.theme.PrimaryColor.Color500};
+  color: ${(props) => props.theme.GrayColor.Color900};
   margin-bottom: 0.25rem;
 `;
 

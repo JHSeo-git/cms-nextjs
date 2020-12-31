@@ -11,7 +11,7 @@ interface Props {
 
 const Index = ({ posts }: Props) => (
   <Layout title="Posts | Next.js + TypeScript Example">
-    <Title align="center">Learning Is For Us</Title>
+    <Title align="center">TIL</Title>
     <PostList posts={posts} />
   </Layout>
 );

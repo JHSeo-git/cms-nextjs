@@ -8,7 +8,7 @@ import Document, {
 import { ServerStyleSheet } from 'styled-components';
 
 interface Props {
-  styleTags: Array<React.ReactElement<{}>>;
+  styleTags: Array<React.ReactElement<Record<any, never>>>;
 }
 
 export default class MyDocument extends Document<Props> {
