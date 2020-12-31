@@ -1,4 +1,4 @@
-import { useRouter } from 'next/dist/client/router';
+// import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 import styled from 'styled-components';
 import ArrcordionCard from '../common/ArrcordionCard';
@@ -17,8 +17,8 @@ const HeaderText = styled.h2`
 const Content = styled.main``;
 
 const SideMenu = () => {
-  const router = useRouter();
-  console.log(router);
+  // const router = useRouter();
+  // console.log(router);
   return (
     <>
       <Header>

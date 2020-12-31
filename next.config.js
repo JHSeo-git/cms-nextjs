@@ -1,12 +1,4 @@
-const withMdxEnhanced = require('next-mdx-enhanced');
-const rehypePrism = require('@mapbox/rehype-prism');
-
-module.exports = withMdxEnhanced({
-  layoutPath: 'src/components/base/Layout',
-  defaultLayout: true,
-  rehypePlugins: [rehypePrism],
-})({
-  pageExtensions: ['mdx', 'tsx'],
+module.exports = {
   webpack: (config) => {
     config.module.rules.push(
       ...[
@@ -23,4 +15,4 @@ module.exports = withMdxEnhanced({
     );
     return config;
   },
-});
+};

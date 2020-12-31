@@ -10,8 +10,9 @@ export interface PostContent {
   readonly slug: string;
   readonly title: string;
   readonly date: string;
+  readonly author: string;
+  readonly category: string;
   readonly tags?: string[];
-  readonly categories?: string[];
 }
 
 let postCache: PostContent[];
@@ -35,13 +36,8 @@ const fetchPostContent = (category?: string) => {
           >,
       },
     });
-    const matterData = matterResult.data as {
-      date: string;
-      title: string;
-      tags: string[];
-      slug: string;
-    };
-    const slug = path.parse(fullFileName).name.replace(/\.mdx$/, '');
+    const matterData = matterResult.data as PostContent;
+    const slug = path.parse(fullFileName).name;
 
     // Validate slug string
     if (matterData.slug !== slug) {
@@ -65,4 +61,27 @@ const fetchPostContent = (category?: string) => {
 
 export const listPostContent = (category?: string) => {
   return fetchPostContent(category);
+};
+
+export const getPostData = (slug: string) => {
+  const fullPath = glob.sync(path.join(postsDirectory, '*', `${slug}.mdx`));
+  const postContent = fullPath && fs.readFileSync(fullPath[0], 'utf8');
+
+  return postContent;
+};
+
+export const getAllPostSlugs = () => {
+  const fullFileNames = glob.sync(path.join(postsDirectory, '*', '*.mdx'));
+  const slugs = fullFileNames.map(
+    (fullFileName) => path.parse(fullFileName).name
+  );
+  return slugs.flatMap((slug) => {
+    return [
+      {
+        params: {
+          slug: [slug],
+        },
+      },
+    ];
+  });
 };

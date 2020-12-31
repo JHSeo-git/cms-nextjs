@@ -18,7 +18,7 @@ const SubTitle = styled.h3`
   color: ${(props) => props.theme.GrayColor.Color700};
 `;
 
-const Post = ({ posts, category }: Props) => {
+const CategoryPosts = ({ posts, category }: Props) => {
   return (
     <Layout title={`${category} Posts | Next.js + TypeScript Example`}>
       <Title align="center">TIL</Title>
@@ -52,4 +52,4 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export default Post;
+export default CategoryPosts;
