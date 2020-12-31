@@ -5,18 +5,39 @@
 - typescript
 - styled-components
 
-## special package
+## webpack
 
-### @mapbox/rehype-prism
+`next.config.js`를 통해 webpack override
 
-HTML `<code>` highlight를 해주는 package
-`Prism.js` 스타일로 표현해줌
-(다른 것으로는 `highlight.js` 스타일도 있음 https://github.com/rehypejs/rehype-highlight)
+### yaml-loaer
+
+yaml 파일 loader
 
 ### @svgr/webpack
 
-svg파일을 css에서 url을 통해 불러올 수 있게
+svg파일을 css에서 url을 통해 불러올수 있게 하는 loader
+
+## MDX
+
+### rehype-highlight
+
+@mapbox/rehype-prism -> rehype-highlight로 변경
+
+### syntax style
+
+github style
+`highlight.js/styles/github.css`
 
 ## Post 구조
 
-`[category].[].[].mdx`
+### /posts
+
+all list
+
+### /posts/categories/[...slug]
+
+all list by category
+
+### /post/[...slug]
+
+post file : [...slug].mdx
