@@ -162,7 +162,7 @@ collections:
     displayFields: - 'category._.name'
     valueFields: 'category.\*.slug'
   - label: Tags
-    label_singular: 'Tag'
+    label*singular: 'Tag'
     name: 'tags'
     widget: list
     summary: '{{fields.tag}}'
@@ -172,8 +172,8 @@ collections:
     widget: relation
     collection: 'meta'
     file: 'tags'
-    searchFields: - 'tags._.name'
-    displayFields: - 'tags._.name'
+    searchFields: - 'tags.*.name'
+    displayFields: - 'tags.\_.name'
     valueField: 'tags.\*.slug'
   - label: 'Body'
     name: 'body'
