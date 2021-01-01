@@ -11,6 +11,7 @@ import {
 } from '../../lib/meta/posts';
 import Layout from '../../components/base/Layout';
 import Post from '../../components/posts/Post';
+import SideMenu from '../../components/base/SideMenu';
 
 interface Props {
   source: string;
@@ -20,7 +21,10 @@ interface Props {
 const PostIndex = ({ source, frontMatter }: Props) => {
   const hydratedSource = hydrate(source);
   return (
-    <Layout title={`${frontMatter.title} | Next.js + TypeScript Example`}>
+    <Layout
+      title={`${frontMatter.title} | Next.js + TypeScript Example`}
+      sideMenu={<SideMenu />}
+    >
       <Post mdxElement={hydratedSource} frontMatter={frontMatter} />
     </Layout>
   );

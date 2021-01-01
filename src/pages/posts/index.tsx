@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next';
 
 import Layout from '../../components/base/Layout';
+import SideMenu from '../../components/base/SideMenu';
 import Title from '../../components/common/Title';
 import PostList from '../../components/posts/PostList';
 import { listPostContent, PostContent } from '../../lib/meta/posts';
@@ -10,7 +11,7 @@ interface Props {
 }
 
 const Index = ({ posts }: Props) => (
-  <Layout title="Posts | Next.js + TypeScript Example">
+  <Layout title="Posts | Next.js + TypeScript Example" sideMenu={<SideMenu />}>
     <Title align="center">TIL</Title>
     <PostList posts={posts} />
   </Layout>

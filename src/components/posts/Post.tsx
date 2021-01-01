@@ -8,7 +8,6 @@ const Wrapper = styled.article`
 `;
 
 const PostTitle = styled.h1`
-  padding: 2rem 0;
   text-align: center;
   margin-bottom: 1rem;
 `;

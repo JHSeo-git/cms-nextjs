@@ -6,11 +6,6 @@ import Footer from './Footer';
 import SideMenu from './SideMenu';
 import { BorderLine } from '../../styles/lib/utils';
 
-type Props = {
-  children?: ReactNode;
-  title?: string;
-};
-
 const LayoutWrapper = styled.div`
   display: flex;
 `;
@@ -35,7 +30,17 @@ const Main = styled.main`
   flex: 1;
 `;
 
-const Layout = ({ children, title = 'This is the default title' }: Props) => (
+type Props = {
+  sideMenu: ReactNode;
+  children?: ReactNode;
+  title?: string;
+};
+
+const Layout = ({
+  sideMenu,
+  children,
+  title = 'This is the default title',
+}: Props) => (
   <div>
     <Head>
       <title>{title}</title>
@@ -43,9 +48,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <LayoutWrapper>
-      <LeftSide>
-        <SideMenu />
-      </LeftSide>
+      <LeftSide>{sideMenu}</LeftSide>
       <RightSide>
         <Header />
         <Main>{children}</Main>

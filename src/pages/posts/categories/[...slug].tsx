@@ -6,6 +6,7 @@ import Title from '../../../components/common/Title';
 import PostList from '../../../components/posts/PostList';
 import { listPostContent, PostContent } from '../../../lib/meta/posts';
 import { getCategory, listCategories } from '../../../lib/meta/categories';
+import SideMenu from '../../../components/base/SideMenu';
 
 interface Props {
   posts: PostContent[];
@@ -20,7 +21,10 @@ const SubTitle = styled.h3`
 
 const CategoryPosts = ({ posts, category }: Props) => {
   return (
-    <Layout title={`${category} Posts | Next.js + TypeScript Example`}>
+    <Layout
+      title={`${category} Posts | Next.js + TypeScript Example`}
+      sideMenu={<SideMenu />}
+    >
       <Title align="center">TIL</Title>
       <SubTitle>{category}</SubTitle>
       <PostList posts={posts} />

@@ -4,6 +4,7 @@ import { User } from '../../interfaces';
 import { sampleUserData } from '../../utils/sample-data';
 import Layout from '../../components/base/Layout';
 import ListDetail from '../../components/ListDetail';
+import SideMenu from '../../components/base/SideMenu';
 
 type Props = {
   item?: User;
@@ -13,7 +14,10 @@ type Props = {
 const StaticPropsDetail = ({ item, errors }: Props) => {
   if (errors) {
     return (
-      <Layout title="Error | Next.js + TypeScript Example">
+      <Layout
+        title="Error | Next.js + TypeScript Example"
+        sideMenu={<SideMenu />}
+      >
         <p>
           <span style={{ color: 'red' }}>Error:</span> {errors}
         </p>
@@ -26,6 +30,7 @@ const StaticPropsDetail = ({ item, errors }: Props) => {
       title={`${
         item ? item.name : 'User Detail'
       } | Next.js + TypeScript Example`}
+      sideMenu={<SideMenu />}
     >
       {item && <ListDetail item={item} />}
     </Layout>

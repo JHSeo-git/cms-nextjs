@@ -16,7 +16,11 @@ const HeaderText = styled.h2`
 
 const Content = styled.main``;
 
-const SideMenu = () => {
+interface Props {
+  menus?: string[];
+}
+
+const SideMenu = ({ menus }: Props) => {
   // const router = useRouter();
   // console.log(router);
   return (
@@ -25,8 +29,9 @@ const SideMenu = () => {
         <HeaderText>Follow Me</HeaderText>
       </Header>
       <Content>
-        <ArrcordionCard />
-        <ArrcordionCard />
+        {menus?.map((menu) => (
+          <ArrcordionCard key={menu} category={menu} />
+        ))}
       </Content>
     </>
   );

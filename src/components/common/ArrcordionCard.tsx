@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import { Icon } from './Icon';
 
@@ -23,6 +24,7 @@ const Header = styled.button`
 const HeaderText = styled.span`
   font-size: 1rem;
   font-weight: bold;
+  text-transform: capitalize;
 `;
 
 const AccordionButton = styled.span<StyleProps>`
@@ -46,7 +48,11 @@ const Content = styled.div<StyleProps>`
 
 const ContentBody = styled.div``;
 
-const ArrcordionCard = () => {
+interface Props {
+  category: string;
+}
+
+const ArrcordionCard = ({ category }: Props) => {
   const [toggle, setToggle] = useState(true);
   const onClick = () => {
     setToggle(!toggle);
@@ -54,14 +60,19 @@ const ArrcordionCard = () => {
   return (
     <Wrapper>
       <Header onClick={onClick}>
-        <HeaderText>Header</HeaderText>
+        <HeaderText>{category}</HeaderText>
         <AccordionButton $collapse={toggle}>
           <Icon icon="arrowdown" aria-label="arrowdown" />
         </AccordionButton>
       </Header>
-      <Content $collapse={toggle}>
-        <ContentBody>content</ContentBody>
-      </Content>
+      <Link
+        href={'posts/categories/[...slug]'}
+        as={`posts/categories/${category}`}
+      >
+        <Content $collapse={toggle}>
+          <ContentBody>content</ContentBody>
+        </Content>
+      </Link>
     </Wrapper>
   );
 };

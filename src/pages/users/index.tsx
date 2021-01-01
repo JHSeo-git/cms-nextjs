@@ -5,13 +5,17 @@ import { User } from '../../interfaces';
 import { sampleUserData } from '../../utils/sample-data';
 import Layout from '../../components/base/Layout';
 import List from '../../components/List';
+import SideMenu from '../../components/base/SideMenu';
 
 type Props = {
   items: User[];
 };
 
 const WithStaticProps = ({ items }: Props) => (
-  <Layout title="Users List | Next.js + TypeScript Example">
+  <Layout
+    title="Users List | Next.js + TypeScript Example"
+    sideMenu={<SideMenu />}
+  >
     <h1>Users List</h1>
     <p>
       Example fetching data from inside <code>getStaticProps()</code>.
