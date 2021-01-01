@@ -137,6 +137,7 @@ collections:
       - label: Category
         name: 'category'
         widget: relation
+        collection: 'meta'
         file: 'categories'
         searchFields:
           - 'categories.*.name'
