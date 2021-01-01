@@ -104,7 +104,7 @@ collections:
                 hint: 'Category name for displaying on the site'
   - name: 'posts'
     label: 'Posts'
-    folder: 'content/posts/*'
+    folder: 'content/posts/{{category}}'
     extension: 'mdx'
     format: 'frontmatter'
     create: true
@@ -136,19 +136,13 @@ collections:
         valueField: 'authors.*.slug'
       - label: Category
         name: 'category'
-        widget: list
-        summary: '{{fields.category}}'
-        field:
-          label: Category
-          name: category
-          widget: relation
-          collection: 'meta'
-          file: 'categories'
-          searchFields:
-            - 'categories.*.name'
-          displayFields:
-            - 'categories.*.name'
-          valueField: 'categories.*.slug'
+        widget: relation
+        file: 'categires'
+        searchFields:
+          - 'categories.*.name'
+        displayFields:
+          - 'categories.*.name'
+        valueField: 'categories.*.slug'
       - label: Tags
         label_singular: 'Tag'
         name: 'tags'
