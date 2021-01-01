@@ -116,6 +116,7 @@ collections:
     view_filters:
       - label: Posts With Category
         field: category
+        pattern: '{{category}}'
     fields:
       - label: 'Slug'
         name: 'slug'
