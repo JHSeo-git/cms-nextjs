@@ -111,69 +111,13 @@ collections:
     format: 'frontmatter'
     create: true
     identifier_field: slug
-    summary: '[{{meta.categories}}] {{title}}'
-    fields:
-      - label: 'Slug'
-        name: 'slug'
-        widget: 'string'
-      - label: 'Title'
-        name: 'title'
-        widget: 'string'
-      - label: 'Publish Date'
-        name: 'date'
-        widget: 'datetime'
-        format: 'YYYY-MM-DD'
-        dateFormat: 'YYYY-MM-DD'
-        timeFormat: false
-      - label: Author
-        name: 'author'
-        widget: relation
-        collection: 'meta'
-        file: 'authors'
-        searchFields:
-          - 'authors.*.name'
-        displayFields:
-          - 'authors.*.name'
-        valueField: 'authors.*.slug'
-      - label: Category
-        name: 'category'
-        widget: relation
-        collection: 'meta'
-        file: 'categories'
-        searchFields:
-          - 'categories.*.name'
-        displayFields:
-          - 'categories.*.name'
-        valueField: 'categories.*.slug'
-      - label: Tags
-        label_singular: 'Tag'
-        name: 'tags'
-        widget: list
-        summary: '{{fields.tag}}'
-        field:
-          label: Tag
-          name: tag
-          widget: relation
-          collection: 'meta'
-          file: 'tags'
-          searchFields:
-            - 'tags.*.name'
-          displayFields:
-            - 'tags.*.name'
-          valueField: 'tags.*.slug'
-      - label: 'Body'
-        name: 'body'
-        widget: 'markdown'
-  - name: 'posts/{{meta.categories}}'
-    label: 'Posts/{{meta.categories}}'
-    folder: 'content/posts'
-    path: '{{meta.categories}}/{{slug}}'
-    slug: '{{slug}}'
-    extension: 'mdx'
-    format: 'frontmatter'
-    create: true
-    identifier_field: slug
-    summary: '[{{meta.categories}}] {{title}}'
+    summary: '[{{category}}] {{title}}'
+    sortable_fields: ['category', 'title', 'date', 'author']
+    filter:
+      filed: category
+      value: '{{category}}'
+    multiple: true
+    required: false
     fields:
       - label: 'Slug'
         name: 'slug'
