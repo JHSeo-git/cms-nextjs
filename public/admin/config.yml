@@ -104,7 +104,7 @@ collections:
                 hint: 'Category name for displaying on the site'
   - name: 'posts'
     label: 'Posts'
-    folder: 'content/posts/{{fields.category}}'
+    folder: 'content/posts/*'
     extension: 'mdx'
     format: 'frontmatter'
     create: true
