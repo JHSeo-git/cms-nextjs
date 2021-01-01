@@ -8,6 +8,7 @@ tags:
   - til
 ---
 
+```yaml
 backend:
 name: git-gateway
 branch: main
@@ -21,7 +22,7 @@ collections:
   label: 'Config'
   delete: false
   editor:
-  preview: false
+    preview: false
   files:
 
   - name: 'general'
@@ -118,7 +119,7 @@ collections:
 
 - name: 'posts'
   label: 'Posts'
-  folder: 'content/posts/\*'
+  folder: 'content/posts/*'
   extension: 'mdx'
   format: 'frontmatter'
   create: true
@@ -144,10 +145,10 @@ collections:
     collection: 'meta'
     file: 'authors'
     searchFields:
-    - 'authors.\*.name'
+    - 'authors.*.name'
       displayFields:
-    - 'authors._.name'
-      valueField: 'authors._.slug'
+    - 'authors.*.name'
+      valueField: 'authors.*.slug'
   - label: Category
     name: 'category'
     widget: list
@@ -158,9 +159,9 @@ collections:
     widget: relation
     collection: 'meta'
     file: 'categories'
-    searchFields: - 'category._.name'
-    displayFields: - 'category._.name'
-    valueFields: 'category.\*.slug'
+    searchFields: - 'category.*.name'
+    displayFields: - 'category.*.name'
+    valueFields: 'category.*.slug'
   - label: Tags
     label*singular: 'Tag'
     name: 'tags'
@@ -173,8 +174,9 @@ collections:
     collection: 'meta'
     file: 'tags'
     searchFields: - 'tags.*.name'
-    displayFields: - 'tags.\_.name'
-    valueField: 'tags.\*.slug'
+    displayFields: - 'tags.*.name'
+    valueField: 'tags.*.slug'
   - label: 'Body'
     name: 'body'
     widget: 'markdown'
+```
