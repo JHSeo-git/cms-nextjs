@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { PostContent } from '../../lib/meta/posts';
 
 const Container = styled.div`
-  padding: 0.5rem;
+  padding: 0.75rem;
 `;
 
-const Title = styled.h3`
+const Title = styled.p`
+  font-size: 1.25rem;
   font-weight: bold;
   color: ${(props) => props.theme.GrayColor.Color900};
   margin-bottom: 0.25rem;

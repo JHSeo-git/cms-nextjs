@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Head from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
-import SideMenu from './SideMenu';
 import { BorderLine } from '../../styles/lib/utils';
 
 const LayoutWrapper = styled.div`
@@ -11,7 +10,7 @@ const LayoutWrapper = styled.div`
 `;
 
 const LeftSide = styled.section`
-  width: 25rem;
+  width: 18rem;
   height: 100vh;
   max-width: 25rem;
   overflow-y: auto;
@@ -31,7 +30,7 @@ const Main = styled.main`
 `;
 
 type Props = {
-  sideMenu: ReactNode;
+  sideMenu?: ReactNode;
   children?: ReactNode;
   title?: string;
 };
@@ -48,9 +47,9 @@ const Layout = ({
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <LayoutWrapper>
-      <LeftSide>{sideMenu}</LeftSide>
+      {sideMenu && <LeftSide>{sideMenu}</LeftSide>}
       <RightSide>
-        <Header />
+        <Header isSideMenu={sideMenu ? true : false} />
         <Main>{children}</Main>
         <Footer />
       </RightSide>

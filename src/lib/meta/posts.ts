@@ -15,16 +15,11 @@ export interface PostContent {
   readonly tags?: string[];
 }
 
-let postCache: PostContent[];
-
 const fetchPostContent = (category?: string) => {
-  if (postCache) {
-    return postCache;
-  }
-
   const fileNames = glob.sync(
     path.join(postsDirectory, category ? category : '*', '*')
   );
+
   const postsData = fileNames.map((fullFileName) => {
     const fileContents = fs.readFileSync(fullFileName, 'utf8');
     const matterResult = matter(fileContents, {
@@ -49,14 +44,14 @@ const fetchPostContent = (category?: string) => {
     return matterData;
   });
   // Sort posts by date
-  postCache = postsData.sort((a, b) => {
+  const result = postsData.sort((a, b) => {
     if (a.date < b.date) {
       return 1;
     } else {
       return -1;
     }
   });
-  return postCache;
+  return result;
 };
 
 export const listPostContent = (category?: string) => {
@@ -68,6 +63,20 @@ export const getPostData = (slug: string) => {
   const postContent = fullPath && fs.readFileSync(fullPath[0], 'utf8');
 
   return postContent;
+};
+
+export const getPostCategoryByPostSlug = (slug: string) => {
+  const postContent = getPostData(slug);
+  const { data } = matter(postContent, {
+    engines: {
+      yaml: (s) =>
+        yaml.safeLoad(s, { schema: yaml.JSON_SCHEMA }) as Record<
+          string,
+          unknown
+        >,
+    },
+  });
+  return data;
 };
 
 export const getAllPostSlugs = () => {

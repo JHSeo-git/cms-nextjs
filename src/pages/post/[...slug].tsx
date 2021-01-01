@@ -7,23 +7,33 @@ import yaml from 'js-yaml';
 import {
   getAllPostSlugs,
   getPostData,
+  listPostContent,
   PostContent,
 } from '../../lib/meta/posts';
 import Layout from '../../components/base/Layout';
 import Post from '../../components/posts/Post';
 import SideMenu from '../../components/base/SideMenu';
+import { CategoryContent, listCategories } from '../../lib/meta/categories';
 
 interface Props {
   source: string;
   frontMatter: PostContent;
+  categories: CategoryContent[];
+  posts: PostContent[];
 }
 
-const PostIndex = ({ source, frontMatter }: Props) => {
+const PostIndex = ({ source, frontMatter, categories, posts }: Props) => {
   const hydratedSource = hydrate(source);
   return (
     <Layout
       title={`${frontMatter.title} | Next.js + TypeScript Example`}
-      sideMenu={<SideMenu />}
+      sideMenu={
+        <SideMenu
+          categories={categories}
+          posts={posts}
+          currentCategory={frontMatter.category}
+        />
+      }
     >
       <Post mdxElement={hydratedSource} frontMatter={frontMatter} />
     </Layout>
@@ -48,7 +58,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       rehypePlugins: [require('rehype-highlight')],
     },
   });
-  return { props: { source: mdxSource, frontMatter: data as PostContent } };
+
+  const categories = listCategories();
+  const posts = listPostContent();
+  return {
+    props: {
+      source: mdxSource,
+      frontMatter: data as PostContent,
+      categories,
+      posts,
+    },
+  };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

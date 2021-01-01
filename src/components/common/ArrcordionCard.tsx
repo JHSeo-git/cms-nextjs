@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import { Icon } from './Icon';
+import { PostContent } from '../../lib/meta/posts';
+import { CategoryContent } from '../../lib/meta/categories';
+import { TextEllipsis } from '../../styles/lib/utils';
+import { useRouter } from 'next/dist/client/router';
 
 interface StyleProps {
   $collapse: boolean;
@@ -11,26 +15,31 @@ const Wrapper = styled.div`
   flex: 1;
 `;
 
-const Header = styled.button`
+const Header = styled.div`
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 0 0.75rem 1rem;
   background: ${(props) => props.theme.GrayColor.Color100};
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.2s linear;
 `;
 
-const HeaderText = styled.span`
-  font-size: 1rem;
+const HeaderLink = styled.a`
+  font-size: 0.85rem;
   font-weight: bold;
   text-transform: capitalize;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  &:hover {
+    color: ${(props) => props.theme.PrimaryColor.Color500};
+  }
 `;
 
-const AccordionButton = styled.span<StyleProps>`
+const AccordionButton = styled.button<StyleProps>`
+  padding: 0 1rem;
   transition: all 0.2s linear;
   opacity: 0.5;
-  ${Header}:hover & {
+  &:hover {
     opacity: 1;
   }
   ${(props) =>
@@ -42,37 +51,73 @@ const AccordionButton = styled.span<StyleProps>`
 
 const Content = styled.div<StyleProps>`
   display: ${(props) => (props.$collapse ? 'none' : 'block')};
-  padding: 0.75rem 0 0.75rem 1rem;
   background: ${(props) => props.theme.GrayColor.Color50};
 `;
 
-const ContentBody = styled.div``;
+const ContentLink = styled.a<{ $current: boolean }>`
+  display: block;
+  font-size: 0.85rem;
+  padding: 0.75rem;
+  padding-left: 1.75rem;
+  transition: all 0.2s linear;
+  ${TextEllipsis()};
+  &:hover {
+    text-decoration: underline;
+  }
+  ${(props) =>
+    props.$current &&
+    css`
+      color: ${(props) => props.theme.PrimaryColor.Color500};
+    `}
+`;
 
 interface Props {
-  category: string;
+  category: CategoryContent;
+  posts: PostContent[];
+  currentCategory?: string;
 }
 
-const ArrcordionCard = ({ category }: Props) => {
-  const [toggle, setToggle] = useState(true);
-  const onClick = () => {
+const ArrcordionCard = ({ category, posts, currentCategory }: Props) => {
+  const route = useRouter();
+  let slug = '';
+  if (route.query.slug) {
+    slug = route.query.slug[0];
+  }
+
+  const [toggle, setToggle] = useState(
+    currentCategory ? currentCategory !== category.slug : true
+  );
+  const onClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
     setToggle(!toggle);
   };
   return (
     <Wrapper>
-      <Header onClick={onClick}>
-        <HeaderText>{category}</HeaderText>
-        <AccordionButton $collapse={toggle}>
+      <Header>
+        <Link
+          href={'/posts/categories/[...slug]'}
+          as={`/posts/categories/${category.slug}`}
+        >
+          <HeaderLink>{category.name}</HeaderLink>
+        </Link>
+        <AccordionButton $collapse={toggle} onClick={onClick}>
           <Icon icon="arrowdown" aria-label="arrowdown" />
         </AccordionButton>
       </Header>
-      <Link
-        href={'posts/categories/[...slug]'}
-        as={`posts/categories/${category}`}
-      >
-        <Content $collapse={toggle}>
-          <ContentBody>content</ContentBody>
-        </Content>
-      </Link>
+
+      <Content $collapse={toggle}>
+        {posts.map((post) => (
+          <Link
+            key={post.slug}
+            href={'/post/[...slug]'}
+            as={`/post/${post.slug}`}
+          >
+            <ContentLink $current={slug === post.slug}>
+              {post.title}
+            </ContentLink>
+          </Link>
+        ))}
+      </Content>
     </Wrapper>
   );
 };

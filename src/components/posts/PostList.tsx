@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import { PostContent } from '../../lib/meta/posts';
 import PostItem from './PostItem';
 
-const List = styled.ul`
-  padding: 2rem;
-`;
+const List = styled.ul``;
 
-const Item = styled.li``;
+const Item = styled.li`
+  &:not(:last-child) {
+    border-bottom: 1px solid ${(props) => props.theme.GrayColor.Color100};
+  }
+`;
 
 interface Props {
   posts: PostContent[];

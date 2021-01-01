@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { Icon } from '../common/Icon';
 import { BorderLine } from '../../styles/lib/utils';
+import config from '../../lib/meta/config';
 
 const HeaderWrapper = styled.header`
   padding: 0 0.5rem;
@@ -42,14 +43,20 @@ const Anchor = styled.a`
 
 const Button = Anchor.withComponent('button');
 
-const Header = () => {
+interface Props {
+  isSideMenu: boolean;
+}
+
+const Header = ({ isSideMenu = true }: Props) => {
   return (
     <HeaderWrapper>
       <Nav>
         <LeftSide>
-          <Button>
-            <Icon icon="menu" aria-label="menu" />
-          </Button>
+          {isSideMenu && (
+            <Button>
+              <Icon icon="menu" aria-label="menu" />
+            </Button>
+          )}
           <Link href="/">
             <Anchor>
               <Icon icon="home" aria-label="home" />
@@ -62,15 +69,17 @@ const Header = () => {
           </Link>
         </LeftSide>
         <RightSide>
-          <Link href="/about">
-            <Anchor>
-              <Icon icon="github" aria-label="github" />
-            </Anchor>
-          </Link>
+          <Anchor
+            title="Github"
+            href={`https://github.com/${config.github_account}`}
+            target="_blank"
+            rel="noopener"
+          >
+            <Icon icon="github" aria-label="github" />
+          </Anchor>
           <Button>
             <Icon icon="bookmarkhollow" aria-label="bookmarkhollow" />
           </Button>
-          <Anchor href="/api/users">Users API</Anchor>
         </RightSide>
       </Nav>
     </HeaderWrapper>

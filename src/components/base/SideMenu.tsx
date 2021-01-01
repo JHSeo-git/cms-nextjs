@@ -1,6 +1,8 @@
 // import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 import styled from 'styled-components';
+import { CategoryContent } from '../../lib/meta/categories';
+import { PostContent } from '../../lib/meta/posts';
 import ArrcordionCard from '../common/ArrcordionCard';
 
 const Header = styled.header`
@@ -17,10 +19,12 @@ const HeaderText = styled.h2`
 const Content = styled.main``;
 
 interface Props {
-  menus?: string[];
+  categories: CategoryContent[];
+  posts: PostContent[];
+  currentCategory?: string;
 }
 
-const SideMenu = ({ menus }: Props) => {
+const SideMenu = ({ categories, posts, currentCategory }: Props) => {
   // const router = useRouter();
   // console.log(router);
   return (
@@ -29,8 +33,13 @@ const SideMenu = ({ menus }: Props) => {
         <HeaderText>Follow Me</HeaderText>
       </Header>
       <Content>
-        {menus?.map((menu) => (
-          <ArrcordionCard key={menu} category={menu} />
+        {categories?.map((category) => (
+          <ArrcordionCard
+            key={category.slug}
+            category={category}
+            currentCategory={currentCategory}
+            posts={posts.filter((post) => post.category === category.slug)}
+          />
         ))}
       </Content>
     </>

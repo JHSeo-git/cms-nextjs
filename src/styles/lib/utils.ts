@@ -27,6 +27,18 @@ export const FlexBox = (isCol = false, isSBP = false) => {
   return flexBoxCSS;
 };
 
+export const DescriptionBox = () => {
+  return css`
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    border-left: 3px solid ${(props) => props.theme.PrimaryColor.Color500};
+    background: ${(props) => props.theme.GrayColor.Color100};
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 0.75rem;
+  `;
+};
+
 export const BoxShadow = (level: number) => {
   if (level === 1) {
     return css`
@@ -55,4 +67,23 @@ export const BoxShadow = (level: number) => {
 
 export const BorderLine = {
   normal: `1px solid rgba(0,0,0,0.07)`,
+};
+
+export const TextEllipsis = (maxLine = 1) => {
+  return css`
+    ${maxLine === 1
+      ? css`
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        `
+      : css`
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: ${maxLine}; /* 라인수 */
+          -webkit-box-orient: vertical;
+          word-wrap: break-word;
+        `}
+  `;
 };
