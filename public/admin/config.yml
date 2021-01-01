@@ -105,7 +105,7 @@ collections:
   - name: 'posts'
     label: 'Posts'
     folder: 'content/posts'
-    path: '*/{{slug}}'
+    path: '{{category}}/{{slug}}'
     slug: '{{slug}}'
     extension: 'mdx'
     format: 'frontmatter'
