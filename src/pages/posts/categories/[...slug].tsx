@@ -5,7 +5,7 @@ import Layout from '../../../components/base/Layout';
 import Title from '../../../components/common/Title';
 import PostList from '../../../components/posts/PostList';
 import { listPostContent, PostContent } from '../../../lib/meta/posts';
-import { getCategory, listCategories } from '../../../lib/meta/category';
+import { getCategory, listCategories } from '../../../lib/meta/categories';
 
 interface Props {
   posts: PostContent[];

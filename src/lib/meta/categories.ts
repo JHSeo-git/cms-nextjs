@@ -9,7 +9,7 @@ const categoryMap: { [key: string]: CategoryContent } = generateCategoryMap();
 
 function generateCategoryMap(): { [key: string]: CategoryContent } {
   const result: { [key: string]: CategoryContent } = {};
-  for (const category of categories.category) {
+  for (const category of categories.categories) {
     result[category.slug] = category;
   }
   return result;
@@ -20,5 +20,5 @@ export function getCategory(slug: string) {
 }
 
 export function listCategories(): CategoryContent[] {
-  return categories.category;
+  return categories.categories;
 }
