@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import Head from 'next/head';
 import Header from './Header';
@@ -70,6 +70,18 @@ const Layout = ({
       storage.set(keys.sideMenu, true);
     }
   };
+
+  useEffect(() => {
+    if (!storage) return;
+    if (!sideMenuDispatch) return;
+
+    const sideMenu = storage.get(keys.sideMenu);
+    if (sideMenu) {
+      sideMenuDispatch({ type: 'OPEN_SIDE_MENU' });
+    } else {
+      sideMenuDispatch({ type: 'CLOSE_SIDE_MENU' });
+    }
+  }, []);
 
   return (
     <>

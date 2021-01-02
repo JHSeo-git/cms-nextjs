@@ -2,33 +2,40 @@ import React from 'react';
 import styled from 'styled-components';
 import config from '../../lib/meta/config';
 import { BorderLine } from '../../styles/lib/utils';
+import { Icon } from '../common/Icon';
+import Tooltip from '../common/Tooltip';
 
 const FooterWrapper = styled.footer`
-  padding: 1rem;
+  padding: 1rem 2rem;
   border-top: ${BorderLine.normal};
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 `;
 
-const Text = styled.p`
+const Text = styled.div`
   font-size: 0.75rem;
   color: ${(props) => props.theme.GrayColor.Color900};
   &:not(:last-child) {
     margin-bottom: 0.5rem;
   }
+  display: flex;
+  align-items: center;
 `;
 
 const Name = styled.span`
+  margin: 0 0.5rem;
   color: ${(props) => props.theme.PrimaryColor.Color500};
 `;
 
 const Link = styled.a`
   color: ${(props) => props.theme.GrayColor.Color600};
+  opacity: 0.5;
   &:not(:last-child) {
-    margin-right: 0.5rem;
+    margin-right: 1rem;
   }
   &:hover {
-    text-decoration: underline;
+    opacity: 1;
   }
 `;
 
@@ -36,14 +43,25 @@ const Footer = () => {
   return (
     <FooterWrapper>
       <Text>
-        COPYRIGHT &#169; 2020 ALL RIGHT <Name>JHSeo</Name>
+        &#169; 2020<Name>JHSeo</Name>ALL rights reserved.
       </Text>
       <Text>
-        <Link href={`mailto: ${config.mail_address}`}>
-          {config.mail_address}
+        <Link
+          href={`mailto: ${config.mail_address}`}
+          data-tooltip-text="E-Mail"
+        >
+          <Tooltip message="email" direction="top-left">
+            <Icon icon="email" aria-label="email" />
+          </Tooltip>
         </Link>
-        <Link href={config.blog_address} target="_blank">
-          Blog
+        <Link
+          href={config.blog_address}
+          target="_blank"
+          data-tooltip-text="Blog"
+        >
+          <Tooltip message="blog" direction="top-left">
+            <Icon icon="box" aria-label="box" />
+          </Tooltip>
         </Link>
       </Text>
     </FooterWrapper>
