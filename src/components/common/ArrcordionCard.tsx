@@ -18,7 +18,6 @@ const Wrapper = styled.div`
 const Header = styled.div`
   width: 100%;
   padding: 0.75rem 1rem;
-  background: ${(props) => props.theme.GrayColor.Color100};
   display: flex;
   justify-content: space-between;
   align-items: center;
