@@ -33,7 +33,7 @@ const CategoryPosts = ({
 }: Props) => {
   return (
     <Layout
-      title={`${category} Posts | Next.js + TypeScript Example`}
+      title={`${category.name} Posts | Next.js + TypeScript Example`}
       sideMenu={
         <SideMenu
           categories={menuCategories}

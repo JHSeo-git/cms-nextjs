@@ -25,8 +25,6 @@ interface Props {
 }
 
 const SideMenu = ({ categories, posts, currentCategory }: Props) => {
-  // const router = useRouter();
-  // console.log(router);
   return (
     <>
       <Header>

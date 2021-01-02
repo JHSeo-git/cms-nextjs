@@ -45,15 +45,16 @@ const Button = Anchor.withComponent('button');
 
 interface Props {
   isSideMenu: boolean;
+  onSideMenuClick: () => void;
 }
 
-const Header = ({ isSideMenu = true }: Props) => {
+const Header = ({ isSideMenu = true, onSideMenuClick }: Props) => {
   return (
     <HeaderWrapper>
       <Nav>
         <LeftSide>
           {isSideMenu && (
-            <Button>
+            <Button onClick={onSideMenuClick}>
               <Icon icon="menu" aria-label="menu" />
             </Button>
           )}

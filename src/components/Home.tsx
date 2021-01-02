@@ -36,10 +36,10 @@ const CategoryItem = styled.li`
   align-items: center;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 0.2s linear;
+  transition: all 0.1s ease-in-out;
   ${BoxShadow(1)};
   &:hover {
-    ${BoxShadow(2)};
+    transform: scale(1.01);
   }
   &:not(:last-child) {
     margin-bottom: 0.5rem;

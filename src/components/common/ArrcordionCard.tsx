@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import { Icon } from './Icon';
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 
 const Header = styled.div`
   width: 100%;
-  padding: 0.75rem 0 0.75rem 1rem;
+  padding: 0.75rem 1rem;
   background: ${(props) => props.theme.GrayColor.Color100};
   display: flex;
   justify-content: space-between;
@@ -36,8 +36,7 @@ const HeaderLink = styled.a`
 `;
 
 const AccordionButton = styled.button<StyleProps>`
-  padding: 0 1rem;
-  transition: all 0.2s linear;
+  transition: all 0.1s ease-in-out;
   opacity: 0.5;
   &:hover {
     opacity: 1;
@@ -45,7 +44,7 @@ const AccordionButton = styled.button<StyleProps>`
   ${(props) =>
     !props.$collapse &&
     css`
-      transform: rotateX(180deg) rotateY(180deg);
+      transform: rotate(90deg);
     `}
 `;
 
@@ -79,18 +78,21 @@ interface Props {
 
 const ArrcordionCard = ({ category, posts, currentCategory }: Props) => {
   const route = useRouter();
-  let slug = '';
-  if (route.query.slug) {
-    slug = route.query.slug[0];
-  }
-
-  const [toggle, setToggle] = useState(
+  const slug = route.query.slug ? route.query.slug[0] : '';
+  const [collapse, setCollapse] = useState(
     currentCategory ? currentCategory !== category.slug : true
   );
   const onClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
-    setToggle(!toggle);
+    setCollapse(!collapse);
   };
+
+  useEffect(() => {
+    if (currentCategory) {
+      setCollapse(currentCategory !== category.slug);
+    }
+  }, [currentCategory]);
+
   return (
     <Wrapper>
       <Header>
@@ -100,12 +102,12 @@ const ArrcordionCard = ({ category, posts, currentCategory }: Props) => {
         >
           <HeaderLink>{category.name}</HeaderLink>
         </Link>
-        <AccordionButton $collapse={toggle} onClick={onClick}>
-          <Icon icon="arrowdown" aria-label="arrowdown" />
+        <AccordionButton $collapse={collapse} onClick={onClick}>
+          <Icon icon="arrowright" aria-label="arrowright" />
         </AccordionButton>
       </Header>
 
-      <Content $collapse={toggle}>
+      <Content $collapse={collapse}>
         {posts.map((post) => (
           <Link
             key={post.slug}
