@@ -3,24 +3,41 @@ import React from 'react';
 import styled from 'styled-components';
 import { CategoryContent } from '../lib/meta/categories';
 import config from '../lib/meta/config';
-import { BoxShadow, DescriptionBox } from '../styles/lib/utils';
+import { BoxShadow } from '../styles/lib/utils';
 import { Icon } from './common/Icon';
 import Title from './common/Title';
 
-const Logo = styled.div`
-  padding: 2rem;
+const Wrapper = styled.div`
+  height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  svg,
-  path {
-    fill: ${(props) => props.theme.GrayColor.Color700};
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    background-color: ${(props) => props.theme.GrayColor.Color200};
+    transform: skew(-20deg);
+    transform-origin: left top;
+    z-index: -1;
   }
-`;
-
-const Description = styled.p`
-  margin-top: 1rem;
-  ${DescriptionBox()}
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -20%;
+    width: 100%;
+    height: 100%;
+    background-color: ${(props) => props.theme.GrayColor.Color100};
+    transform: skew(-20deg);
+    transform-origin: right top;
+    z-index: -1;
+  }
 `;
 
 const CategoryItems = styled.ul`
@@ -37,9 +54,10 @@ const CategoryItem = styled.li`
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
+  background: white;
   ${BoxShadow(1)};
   &:hover {
-    transform: scale(1.01);
+    transform: scale(1.05);
   }
   &:not(:last-child) {
     margin-bottom: 0.5rem;
@@ -52,6 +70,7 @@ const CategoryIcon = styled.span`
   path {
     color: ${(props) => props.theme.GrayColor.Color700};
   }
+  margin-right: 0.5rem;
 `;
 const Category = styled.h4`
   font-weight: bold;
@@ -64,16 +83,8 @@ interface Props {
 
 const Home = ({ categories }: Props) => {
   return (
-    <>
-      <Logo>
-        <Icon
-          icon="repository"
-          aria-label="repository"
-          width="60px"
-          height="60px"
-        />
-        <Title align="center">{config.site_title}</Title>
-      </Logo>
+    <Wrapper>
+      <Title align="center">{config.site_title}</Title>
       <CategoryItems>
         {categories.map((category) => (
           <Link
@@ -90,8 +101,7 @@ const Home = ({ categories }: Props) => {
           </Link>
         ))}
       </CategoryItems>
-      <Description>this page use NEXTJS, Netlify-CMS, React</Description>
-    </>
+    </Wrapper>
   );
 };
 

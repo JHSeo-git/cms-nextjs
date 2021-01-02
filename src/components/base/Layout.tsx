@@ -38,10 +38,10 @@ const RightSide = styled.section`
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 const Main = styled.main`
-  padding: 0.5rem;
   flex: 1;
 `;
 
