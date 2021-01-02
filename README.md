@@ -1,3 +1,5 @@
+https://seo-cms-nextjs.netlify.app/
+
 # Practice for nextjs
 
 - nextjs
@@ -8,14 +10,6 @@
 ## webpack
 
 `next.config.js`를 통해 webpack override
-
-### yaml-loaer
-
-yaml 파일 loader
-
-### @svgr/webpack
-
-svg파일을 css에서 url을 통해 불러올수 있게 하는 loader
 
 ## MDX
 
@@ -28,7 +22,14 @@ svg파일을 css에서 url을 통해 불러올수 있게 하는 loader
 github style
 `highlight.js/styles/github.css`
 
-## Post 구조
+## Context API
+
+- side menu toggle 관리
+
+## Pages
+
+- / : home
+- /about : about
 
 ### /posts
 
