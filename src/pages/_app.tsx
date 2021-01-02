@@ -1,4 +1,3 @@
-import { GetStaticProps } from 'next';
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { SideMenuProvider } from '../lib/contexts/SideMenuContext';
