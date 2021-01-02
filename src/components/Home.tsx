@@ -7,21 +7,14 @@ import { BoxShadow, DescriptionBox } from '../styles/lib/utils';
 import { Icon } from './common/Icon';
 import Title from './common/Title';
 
-const LogoWrapper = styled.div`
+const Logo = styled.div`
   padding: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const Logo = styled.span`
-  transition: transform 0.1s linear;
   svg,
   path {
-    fill: ${(props) => props.theme.PrimaryColor.Color500};
-  }
-  &:hover {
-    transform: translateY(-10%);
+    fill: ${(props) => props.theme.GrayColor.Color700};
   }
 `;
 
@@ -32,22 +25,27 @@ const Description = styled.p`
 
 const CategoryItems = styled.ul`
   margin-top: 2rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 const CategoryItem = styled.li`
-  padding: 2rem;
+  padding: 0.5rem 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  ${BoxShadow(1)};
-  transition: all 0.2s linear;
+  border-radius: 4px;
   cursor: pointer;
+  transition: all 0.2s linear;
+  ${BoxShadow(1)};
   &:hover {
     ${BoxShadow(2)};
   }
+  &:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
   user-select: none;
+  width: 20rem;
 `;
 const CategoryIcon = styled.span`
   svg,
@@ -67,17 +65,15 @@ interface Props {
 const Home = ({ categories }: Props) => {
   return (
     <>
-      <LogoWrapper>
-        <Logo>
-          <Icon
-            icon="repository"
-            aria-label="repository"
-            width="60px"
-            height="60px"
-          />
-        </Logo>
-      </LogoWrapper>
-      <Title align="center">{config.site_title}</Title>
+      <Logo>
+        <Icon
+          icon="repository"
+          aria-label="repository"
+          width="60px"
+          height="60px"
+        />
+        <Title align="center">{config.site_title}</Title>
+      </Logo>
       <CategoryItems>
         {categories.map((category) => (
           <Link

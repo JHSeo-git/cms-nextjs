@@ -79,13 +79,20 @@ const a = 1 + 1;
 ```
 
 ```ts
-interface Props {
-  a: string;
+class MyClass {
+  public static myValue: string;
+  constructor(init: string) {
+    this.myValue = init;
+  }
 }
-
-const payload: Props = {
-  a: "2";
+import fs = require("fs");
+module MyModule {
+  export interface MyInterface extends Other {
+    myProperty: any;
+  }
 }
+declare magicNumber number;
+myArray.forEach(() => { }); // fat arrow syntax
 ```
 
 ```html

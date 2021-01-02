@@ -38,19 +38,19 @@ const GlobalStyle = createGlobalStyle`
     }
     h1{
         font-size: 2rem;
-        padding: 2rem;
+        padding: 2rem 0;
     }
     h2{
         font-size: 1.5rem;
-        padding: 1rem;
+        padding: 1rem 0;
     }
     h3{
         font-size: 1.17rem;
-        padding: 1.17rem;
+        padding: 1.17rem 0;
     }
     h4{
         font-size: 1rem;
-        padding: 1rem;
+        padding: 1rem 0;
     }
     h5{
         font-size: 0.83rem;

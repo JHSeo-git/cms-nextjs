@@ -42,6 +42,10 @@ export default class MyDocument extends Document<Props> {
             href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap"
             rel="stylesheet"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;500;700&display=swap"
+            rel="stylesheet"
+          ></link>
           {styleTags}
         </Head>
         <body>

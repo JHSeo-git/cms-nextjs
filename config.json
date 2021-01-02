@@ -1,7 +1,7 @@
 {
   "base_url": "https://seo-cms-nextjs.netlify.app",
-  "site_title": "SEO's TIL",
-  "site_description": "Next.js blog template for Netlify",
+  "site_title": "BOOKLOG",
+  "site_description": "Information for Developer",
   "site_keywords": [
     {
       "keyword": "Next.js"
@@ -13,5 +13,7 @@
       "keyword": "React"
     }
   ],
-  "github_account": "JHSeo-git"
+  "github_account": "JHSeo-git",
+  "mail_address": "qnfqnfqnf@gmail.com",
+  "blog_address": "https://velog.io/@namezin"
 }
