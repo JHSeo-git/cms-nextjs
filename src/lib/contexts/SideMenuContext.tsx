@@ -1,5 +1,4 @@
 import { useReducer, useContext, createContext, Dispatch } from 'react';
-import storage, { keys } from '../../lib/storage';
 
 type State = {
   sideMenu: boolean;
@@ -34,14 +33,9 @@ interface Props {
   children: React.ReactNode;
 }
 
-const initializeSideMenu = () => {
-  const sideMenu = storage.get(keys.sideMenu);
-  return sideMenu;
-};
-
 export const SideMenuProvider = ({ children }: Props) => {
   const [state, dispatch] = useReducer(reducer, {
-    sideMenu: initializeSideMenu(),
+    sideMenu: false,
   });
 
   return (
