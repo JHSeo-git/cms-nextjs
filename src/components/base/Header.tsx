@@ -5,7 +5,7 @@ import { Icon } from '../common/Icon';
 import { BorderLine } from '../../styles/lib/utils';
 import config from '../../lib/meta/config';
 
-const HeaderWrapper = styled.header`
+const Wrapper = styled.div`
   padding: 0 0.5rem;
   width: 100%;
   border-bottom: ${BorderLine.normal};
@@ -50,7 +50,7 @@ interface Props {
 
 const Header = ({ isSideMenu = true, onSideMenuClick }: Props) => {
   return (
-    <HeaderWrapper>
+    <Wrapper>
       <Nav>
         <LeftSide>
           {isSideMenu && (
@@ -83,7 +83,7 @@ const Header = ({ isSideMenu = true, onSideMenuClick }: Props) => {
           </Button>
         </RightSide>
       </Nav>
-    </HeaderWrapper>
+    </Wrapper>
   );
 };
 

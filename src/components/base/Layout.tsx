@@ -1,5 +1,5 @@
-import React, { ReactNode, useEffect } from 'react';
-import styled, { css } from 'styled-components';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import styled, { css, keyframes } from 'styled-components';
 import Head from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
@@ -9,6 +9,7 @@ import {
   useSideMenu,
 } from '../../lib/contexts/SideMenuContext';
 import storage, { keys } from '../../lib/storage';
+import { useRouter } from 'next/router';
 
 const LayoutWrapper = styled.div`
   display: flex;
@@ -41,6 +42,44 @@ const RightSide = styled.section`
   position: relative;
 `;
 
+interface StyledHeaderProps {
+  $isSticky: boolean;
+}
+
+const downSideAni = keyframes`
+  0%{
+    transform: translateY(-100%);
+  }
+  100%{
+    transform: translateY(0);
+  }
+`;
+
+const upSideAni = keyframes`
+  0%{
+    top: 0;
+  }
+  100%{
+    top: -100%;
+  }
+`;
+
+const HeaderWrapper = styled.header<StyledHeaderProps>`
+  background: white;
+  position: sticky;
+  z-index: 10;
+  ${(props) =>
+    props.$isSticky
+      ? css`
+          top: 0;
+          animation: ${downSideAni} 0.2s ease-in-out;
+        `
+      : css`
+          top: -100%;
+          animation: ${upSideAni} 2s ease-in-out;
+        `}
+`;
+
 const Main = styled.main`
   flex: 1;
 `;
@@ -58,6 +97,7 @@ const Layout = ({
 }: Props) => {
   const sideMenuState = useSideMenu();
   const sideMenuDispatch = useDispatchSideMenu();
+  const { asPath } = useRouter();
 
   const onSideMenuClick = () => {
     if (!sideMenuState || !sideMenuDispatch) return;
@@ -71,7 +111,7 @@ const Layout = ({
     }
   };
 
-  useEffect(() => {
+  const toggleSideMenu = () => {
     if (!storage) return;
     if (!sideMenuDispatch) return;
 
@@ -81,7 +121,29 @@ const Layout = ({
     } else {
       sideMenuDispatch({ type: 'CLOSE_SIDE_MENU' });
     }
+  };
+
+  const [isSticky, setSticky] = useState(false);
+  const [prevTop, setPrevTop] = useState(0);
+  const ref = useRef<HTMLElement | null>(null);
+  const handleScroll = () => {
+    if (!ref.current) return;
+    if (prevTop < ref.current.scrollTop) {
+      setSticky(false);
+    } else {
+      setSticky(true);
+    }
+    setPrevTop(ref.current.scrollTop);
+  };
+
+  useEffect(() => {
+    toggleSideMenu();
   }, []);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    ref.current.scrollTo(0, 0);
+  }, [asPath]);
 
   return (
     <>
@@ -96,11 +158,13 @@ const Layout = ({
             {sideMenu}
           </LeftSide>
         )}
-        <RightSide>
-          <Header
-            isSideMenu={sideMenu ? true : false}
-            onSideMenuClick={onSideMenuClick}
-          />
+        <RightSide onScroll={handleScroll} ref={ref}>
+          <HeaderWrapper $isSticky={isSticky}>
+            <Header
+              isSideMenu={sideMenu ? true : false}
+              onSideMenuClick={onSideMenuClick}
+            />
+          </HeaderWrapper>
           <Main>{children}</Main>
           <Footer />
         </RightSide>

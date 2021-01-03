@@ -5,7 +5,7 @@ import { Icon } from './Icon';
 import { PostContent } from '../../lib/meta/posts';
 import { CategoryContent } from '../../lib/meta/categories';
 import { TextEllipsis } from '../../styles/lib/utils';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 
 interface StyleProps {
   $collapse: boolean;
@@ -37,6 +37,10 @@ const HeaderLink = styled.a`
 const AccordionButton = styled.button<StyleProps>`
   transition: all 0.1s ease-in-out;
   opacity: 0.5;
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
   &:hover {
     opacity: 1;
   }
@@ -66,6 +70,7 @@ const ContentLink = styled.a<{ $current: boolean }>`
     props.$current &&
     css`
       color: ${(props) => props.theme.PrimaryColor.Color500};
+      background: white;
     `}
 `;
 

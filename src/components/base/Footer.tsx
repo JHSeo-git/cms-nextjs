@@ -24,8 +24,8 @@ const Text = styled.div`
 `;
 
 const Name = styled.span`
-  margin: 0 0.5rem;
-  color: ${(props) => props.theme.PrimaryColor.Color500};
+  margin: 0 0.25rem;
+  color: ${(props) => props.theme.GrayColor.Color500};
 `;
 
 const Link = styled.a`
@@ -38,12 +38,22 @@ const Link = styled.a`
     opacity: 1;
   }
 `;
+const LinkText = styled.a`
+  margin-left: 0.25rem;
+  color: ${(props) => props.theme.PrimaryColor.Color500};
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 
 const Footer = () => {
   return (
     <FooterWrapper>
       <Text>
-        &#169; 2020<Name>JHSeo</Name>ALL rights reserved.
+        &#169; 2020<Name>JHSeo.</Name>Built with
+        <LinkText href="https://nextjs.org/" target="_blank">
+          Next.js
+        </LinkText>
       </Text>
       <Text>
         <Link
