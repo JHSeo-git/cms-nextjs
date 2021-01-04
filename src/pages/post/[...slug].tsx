@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+import Head from 'next/head';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
 import matter from 'gray-matter';
@@ -20,23 +21,43 @@ interface Props {
   frontMatter: PostContent;
   categories: CategoryContent[];
   posts: PostContent[];
+  nextSlug: string;
+  prevSlug: string;
 }
 
-const PostIndex = ({ source, frontMatter, categories, posts }: Props) => {
+const PostIndex = ({
+  source,
+  frontMatter,
+  categories,
+  posts,
+  nextSlug,
+  prevSlug,
+}: Props) => {
   const hydratedSource = hydrate(source);
   return (
-    <Layout
-      title={`${frontMatter.title} | Next.js + TypeScript Example`}
-      sideMenu={
-        <SideMenu
-          categories={categories}
-          posts={posts}
-          currentCategory={frontMatter.category}
+    <>
+      <Head>
+        <link rel="next" href={nextSlug} />
+        <link rel="prev" href={prevSlug} />
+      </Head>
+      <Layout
+        title={`${frontMatter.title} | Next.js + TypeScript Example`}
+        sideMenu={
+          <SideMenu
+            categories={categories}
+            posts={posts}
+            currentCategory={frontMatter.category}
+          />
+        }
+      >
+        <Post
+          mdxElement={hydratedSource}
+          frontMatter={frontMatter}
+          nextSlug={nextSlug}
+          prevSlug={prevSlug}
         />
-      }
-    >
-      <Post mdxElement={hydratedSource} frontMatter={frontMatter} />
-    </Layout>
+      </Layout>
+    </>
   );
 };
 
@@ -61,12 +82,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const categories = listCategories();
   const posts = listPostContent();
+  const targetIdx = posts.findIndex((post) => post.slug === slug);
+  const nextSlug =
+    targetIdx + 1 < posts.length ? posts[targetIdx + 1].slug : '';
+  const prevSlug = targetIdx - 1 > -1 ? posts[targetIdx - 1].slug : '';
   return {
     props: {
       source: mdxSource,
       frontMatter: data as PostContent,
       categories,
       posts,
+      nextSlug,
+      prevSlug,
     },
   };
 };
