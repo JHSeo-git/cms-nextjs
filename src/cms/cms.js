@@ -8,11 +8,17 @@ const PreviewComponent = ({ children }) => {
   const [iframeRef, setIframeRef] = useState(null);
 
   useEffect(() => {
-    const iframe = document.getElementById('preview-pane');
-    if (!iframe) return;
-    const iframeConenteHead = iframe.contentDocument.head;
-    if (!iframeConenteHead) return;
-    setIframeRef(iframeConenteHead);
+    // const iframe = document.getElementById('preview-pane');
+    // if (!iframe) return;
+    // const iframeConenteHead = iframe.contentDocument.head;
+    // if (!iframeConenteHead) return;
+    const previewPaneIframe = document.querySelector(
+      'iframe[class*="PreviewPaneFrame"]'
+    );
+    const previewPaneHeadEl = previewPaneIframe.contentWindow.document.querySelector(
+      'head'
+    );
+    setIframeRef(previewPaneHeadEl);
   }, []);
 
   return (

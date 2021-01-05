@@ -4,9 +4,9 @@ import HighlightWrapper from '../components/mdx/HighlightWrapper';
 
 const PreviewTemplate = (props: Core.PreviewTemplateComponentProps) => {
   const { entry } = props;
+  const body = entry.getIn(['data', 'body']);
   console.log('entry', entry);
-  const mdxBody = entry.getIn(['data', 'body']);
-  return <HighlightWrapper>{mdxBody}</HighlightWrapper>;
+  return <HighlightWrapper>{body}</HighlightWrapper>;
 };
 
 export default PreviewTemplate;
