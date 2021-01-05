@@ -10,12 +10,11 @@ const Title = styled.h1`
 
 const PreviewTemplate = (props: Core.PreviewTemplateComponentProps) => {
   const { entry, widgetFor } = props;
-  const title = entry.getIn(['data', 'title']);
+  const data = entry.get('data');
   const body = widgetFor('body');
-  console.log('entry', title, body);
   return (
     <>
-      <Title>{title}</Title>
+      <Title>TTitle: {data.get('title')}</Title>
       <HighlightWrapper>{body}</HighlightWrapper>
     </>
   );
