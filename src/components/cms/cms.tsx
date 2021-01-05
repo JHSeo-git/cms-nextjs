@@ -13,7 +13,10 @@ const PreviewComponent = ({ children }: Props) => {
   useEffect(() => {
     const iframe = document.getElementById('preview-pane');
     if (!iframe) return;
-    setIframeRef(iframe);
+    const iframeConenteHead = (iframe as HTMLObjectElement).contentDocument
+      ?.head;
+    if (!iframeConenteHead) return;
+    setIframeRef(iframeConenteHead);
   }, []);
 
   return iframeRef ? (
