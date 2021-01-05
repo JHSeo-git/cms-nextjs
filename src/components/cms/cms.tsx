@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheetManager } from 'styled-components';
 import CMS from 'netlify-cms-app';
-import HighlightWrapper from '../mdx/HighlightWrapper';
+import PreviewTemplate from './templates/PreviewTemplate';
 
 interface Props {
   children: React.ReactNode;
@@ -23,8 +23,10 @@ const PreviewComponent = ({ children }: Props) => {
     <StyleSheetManager>{children}</StyleSheetManager>
   );
 };
+
+// register preview
 CMS.registerPreviewTemplate('posts', (props) => (
   <PreviewComponent>
-    <HighlightWrapper>{props}</HighlightWrapper>
+    <PreviewTemplate {...props} />
   </PreviewComponent>
 ));
