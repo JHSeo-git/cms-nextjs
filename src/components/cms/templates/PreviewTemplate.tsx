@@ -3,8 +3,8 @@ import * as Core from 'netlify-cms-core';
 import HighlightWrapper from '../../mdx/HighlightWrapper';
 
 const PreviewTemplate = (props: Core.PreviewTemplateComponentProps) => {
-  const { entry } = props;
-  const mdxBody = entry.getIn(['body']);
+  const { widgetFor } = props;
+  const mdxBody = widgetFor('body');
   return <HighlightWrapper>{mdxBody}</HighlightWrapper>;
 };
 
