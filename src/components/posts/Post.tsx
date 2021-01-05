@@ -59,7 +59,6 @@ interface Props {
 }
 
 const Post = ({ mdxElement, frontMatter, nextSlug, prevSlug }: Props) => {
-  console.log(prevSlug, nextSlug);
   return (
     <Wrapper>
       <Content>
