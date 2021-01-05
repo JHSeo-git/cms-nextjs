@@ -30,6 +30,7 @@
     "gray-matter": "^4.0.2",
     "highlight.js": "^10.5.0",
     "js-yaml": "^3.14.1",
+    "netlify-cms-app": "^2.14.9",
     "next": "latest",
     "next-mdx-remote": "^2.0.1",
     "react": "^16.12.0",

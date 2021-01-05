@@ -7,7 +7,7 @@ const Wrapper = styled.section`
   font-size: 1.125rem;
   word-break: break-word;
   word-wrap: break-word;
-  font-family: 'Noto Serif KR', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   color: ${(props) => props.theme.GrayColor.Color800};
   a {
     color: ${(props) => props.theme.PrimaryColor.Color500};
