@@ -1,3 +1,4 @@
 {
-  "editer.formatOnSave": true
+  "editer.formatOnSave": true,
+  "files.eol": "\n"
 }
