@@ -28,7 +28,6 @@ const PreviewComponent = ({ children }: Props) => {
 };
 
 // register preview
-CMS.init();
 CMS.registerPreviewTemplate('posts', (props) => (
   <PreviewComponent>
     <PreviewTemplate {...props} />
