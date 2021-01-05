@@ -15,6 +15,7 @@ const PreviewComponent = ({ children }: Props) => {
     if (!iframe) return;
     const iframeConenteHead = (iframe as HTMLObjectElement).contentDocument
       ?.head;
+    console.log('head', iframeConenteHead);
     if (!iframeConenteHead) return;
     setIframeRef(iframeConenteHead);
   }, []);
