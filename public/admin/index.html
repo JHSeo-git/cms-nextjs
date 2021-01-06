@@ -14,7 +14,7 @@
       CMS.registerPreviewStyle('/styles/hljs-github.css');
       CMS.registerPreviewStyle('/styles/content.module.css');
       var PostPreview = createClass({
-        render: async function () {
+        render: function () {
           var entry = this.props.entry;
           var date = entry.getIn(['data', 'date']);
           return h(
@@ -25,7 +25,7 @@
             h(
               'div',
               {},
-              await renderHljs(this.props.widgetFor('body').contentForRender())
+              renderHljs(this.props.widgetFor('body').contentForRender())
             )
           );
         },
