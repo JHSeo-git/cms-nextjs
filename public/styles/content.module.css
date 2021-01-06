@@ -1,0 +1,337 @@
+.content {
+  text-align: start;
+  font-size: 1.125rem;
+  word-break: break-word;
+  word-wrap: break-word;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #424242;
+}
+
+.content a {
+  color: #03a9f4;
+}
+
+.content a:hover {
+  text-decoration: underline;
+}
+
+.content p {
+  line-height: 1.75;
+  font-weight: 400;
+  color: #616161;
+}
+
+.content strong,
+.content b {
+  font-weight: 600;
+}
+
+.content p + p {
+  margin-top: 1.5em;
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  color: #212121;
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  padding: 0;
+}
+
+.content h1 code,
+.content h2 code,
+.content h3 code,
+.content h4 code,
+.content h5 code,
+.content h6 code {
+  font-weight: 600;
+}
+
+.content h1 code,
+.content h2 code,
+.content h3 code,
+.content h4 code,
+.content h5 code,
+.content h6 code,
+.content p code {
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+  border-radius: 3px;
+  background: #f5f5f5;
+  border: 1px solid #bdbdbd;
+  color: #757575;
+  margin-left: 0.3em;
+  margin-right: 0.3em;
+}
+
+.content p,
+.content blockquote,
+.content table,
+.coneent pre {
+  margin: 15px 0;
+}
+
+.content blockquote {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.content pre {
+  margin: 0.5em 0;
+  overflow: auto;
+  border: 1px solid #f5f5f5;
+  border-radius: 3px;
+}
+
+.content pre code {
+  padding: 1em;
+  font-family: 'Inconsolata', Consolas, 'Ubuntu Mono', monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+.content li {
+  line-height: 1.75;
+}
+
+.content ul,
+.content ol {
+  list-style: disc;
+  font-weight: 400;
+  color: #616161;
+}
+
+.content ul {
+  padding-left: 30px;
+}
+
+.content li + li {
+  margin-top: 0.25em;
+}
+
+.content ol {
+  padding-left: 30px;
+}
+
+.content ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+.content hr {
+  border-top: 1px solid #e0e0e0;
+  margin: 15px 0;
+  padding: 0;
+}
+
+.content > h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.content > h1:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.content > h1:first-child + h2 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.content > h3:first-child,
+.content > h4:first-child,
+.content > h5:first-child,
+.content > h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.content a:first-child h1,
+.content a:first-child h2,
+.content a:first-child h3,
+.content a:first-child h4,
+.content a:first-child h5,
+.content a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.content h1 + p,
+.content h2 + p,
+.content h3 + p,
+.content h4 + p,
+.content h5 + p,
+.content h6 + p,
+.content ul li > :first-child,
+.content ol li > :first-child {
+  margin-top: 0;
+}
+
+.content dl {
+  padding: 0;
+}
+
+.content dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+.content dl dt:first-child {
+  padding: 0;
+}
+
+.content dl dt > :first-child {
+  margin-top: 0;
+}
+
+.content dl dt > :last-child {
+  margin-bottom: 0;
+}
+
+.content dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+.content dl dd > :first-child {
+  margin-top: 0;
+}
+
+.content dl dd > :last-child {
+  margin-bottom: 0;
+}
+
+.content blockquote {
+  border-left: 4px solid #bdbdbd;
+  padding: 0 15px;
+  color: #777;
+}
+
+.content blockquote > :first-child {
+  margin-top: 0;
+}
+
+.content blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+.content table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 100%;
+  font: inherit;
+}
+
+.content table th {
+  font-weight: bold;
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+.content table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+.content table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.content table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.content img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  margin-top: 3em;
+  margin-bottom: 3em;
+  pointer-events: none;
+}
+
+.content blockquote {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.content .youtube {
+  background: #fafafa;
+  border-radius: 4px;
+  display: block;
+  margin: auto;
+  width: 768px;
+  max-width: 100%;
+  height: 430px;
+}
+
+.content .twitter-wrapper {
+  display: flex;
+  justify-content: center;
+  height: 580px;
+  align-items: center;
+}
+
+.content .twitter-wrapper blockquote {
+  background: #fafafa;
+  border-radius: 4px;
+  width: 500px;
+  height: 400px;
+  border-left: none;
+}
+
+.content mark {
+  padding: 0.25rem 0.5rem;
+  background: #8bc34a;
+  color: #fafafa;
+  border-radius: 4px;
+}
+
+.content abbr[title] {
+  text-decoration: underline double;
+}
+
+.content kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 1em Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb;
+}
+
+@media screen and (min-width: 769px) {
+  .content .youtube {
+    height: 300px;
+  }
+}
+
+@media (min-width: 769px) {
+  .content h2,
+  .content h3,
+  .content h4,
+  .content h5 {
+    position: relative;
+  }
+
+  .content h2::before {
+    display: block;
+  }
+}

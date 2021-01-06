@@ -270,6 +270,28 @@ const Wrapper = styled.section`
     border-radius: 3px;
     box-shadow: inset 0 -1px 0 #bbb;
   }
+  abbr[title] {
+    text-decoration: underline double;
+  }
+
+  @media screen and (min-width: 769px) {
+    .content .youtube {
+      height: 300px;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .content h2,
+    .content h3,
+    .content h4,
+    .content h5 {
+      position: relative;
+    }
+
+    .content h2::before {
+      display: block;
+    }
+  }
 `;
 
 // const Wrapper = styled.section`

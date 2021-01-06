@@ -34,7 +34,3 @@ CMS.registerPreviewTemplate('posts', (props) => (
     <PreviewTemplate {...props} />
   </PreviewComponent>
 ));
-
-if (window) {
-  window.alert(CMS);
-}
