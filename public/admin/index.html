@@ -9,19 +9,12 @@
   <body>
     <!-- Include the script that builds the page and powers Netlify CMS -->
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-    <script src="https://unpkg.com/@highlightjs/cdn-assets@10.5.0/highlight.min.js"></script>
+    <script type="module" src="preview.js"></script>
     <script>
       CMS.registerPreviewStyle('/styles/hljs-github.css');
-      document.addEventListener('DOMContentLoaded', (event) => {
-        document.querySelectorAll('pre code').forEach((block) => {
-          hljs.highlightBlock(block);
-        });
-      });
-    </script>
-    <script>
       CMS.registerPreviewStyle('/styles/content.module.css');
       var PostPreview = createClass({
-        render: function () {
+        render: async function () {
           var entry = this.props.entry;
           var date = entry.getIn(['data', 'date']);
           return h(
@@ -29,7 +22,11 @@
             { className: 'content' },
             h('h1', {}, entry.getIn(['data', 'title'])),
             h('time', {}, entry.getIn(['data', 'date'])),
-            h('div', {}, this.props.widgetFor('body'))
+            h(
+              'div',
+              {},
+              await renderHljs(this.props.widgetFor('body').contentForRender())
+            )
           );
         },
       });
