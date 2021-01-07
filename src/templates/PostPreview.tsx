@@ -18,7 +18,7 @@ const PostPreview = (props: PreviewTemplateComponentProps) => {
   const title = entry.getIn(['data', 'title']);
   const body = entry.getIn(['data', 'body']);
 
-  const [renderBody, setRenderBody] = useState<string | null>(null);
+  const [renderBody, setRenderBody] = useState<React.ReactNode | null>(null);
 
   const styledBody = async (postContent: string) => {
     const { content } = matter(postContent, {
@@ -37,7 +37,7 @@ const PostPreview = (props: PreviewTemplateComponentProps) => {
       },
     });
 
-    setRenderBody(mdxSource);
+    setRenderBody(hydrate(mdxSource));
   };
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const PostPreview = (props: PreviewTemplateComponentProps) => {
   return (
     <PreviewTemplate>
       <Title>TTitle: {title}</Title>
-      <HighlightWrapper>{hydrate(renderBody)}</HighlightWrapper>
+      <HighlightWrapper>{renderBody}</HighlightWrapper>
     </PreviewTemplate>
   );
 };
