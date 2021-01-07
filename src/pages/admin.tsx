@@ -1,25 +1,24 @@
-import Head from 'next/head';
 import { useEffect } from 'react';
 import PostPreview from '../templates/PostPreview';
+import config from '../../public/config.yml';
 
 const Admin = () => {
   useEffect(() => {
     (async () => {
+      const IdWidget = (await import('netlify-identity-widget')).default;
+
+      IdWidget.init();
+    })();
+
+    (async () => {
       const CMS = (await import('netlify-cms-app')).default;
-      CMS.init();
+      CMS.init(config);
 
       CMS.registerPreviewTemplate('posts', PostPreview);
     })();
   }, []);
 
-  return (
-    <>
-      <Head>
-        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-      </Head>
-      <div />
-    </>
-  );
+  return <div />;
 };
 
 export default Admin;
