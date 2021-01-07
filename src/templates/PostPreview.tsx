@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PreviewTemplateComponentProps } from 'netlify-cms-core';
 import styled from 'styled-components';
 import renderToString from 'next-mdx-remote/render-to-string';
