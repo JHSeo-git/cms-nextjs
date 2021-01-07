@@ -42,3 +42,8 @@ all list by category
 ### /post/[...slug]
 
 post file : [...slug].mdx
+
+## tips?
+
+nextjs webpack 실행 시 'fs' error 떨어질 수 있는데 client 실행 시에는 node 가 없어 막아야 한다.
+webpack에서 config.node: { fs: 'empty' } 로 넣어준다.

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { StyleSheetManager } from 'styled-components';
+import { StyleSheetManager, ThemeProvider } from 'styled-components';
+import theme from '../styles/theme';
 
 interface PreviewTemplateProps {
   children: React.ReactNode;
@@ -23,7 +24,11 @@ const PreviewTemplate = ({ children }: PreviewTemplateProps) => {
     setIframeRef(previewPaneHeadEl);
   }, []);
 
-  return <StyleSheetManager target={iframeRef}>{children}</StyleSheetManager>;
+  return (
+    <ThemeProvider theme={theme}>
+      <StyleSheetManager target={iframeRef}>{children}</StyleSheetManager>
+    </ThemeProvider>
+  );
 };
 
 export default PreviewTemplate;
