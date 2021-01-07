@@ -6,12 +6,18 @@ import theme from '../styles/theme';
 
 function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <SideMenuProvider>
+    <>
+      {Component.name === 'Admin' ? (
         <Component {...pageProps} />
-      </SideMenuProvider>
-    </ThemeProvider>
+      ) : (
+        <ThemeProvider theme={theme}>
+          <GlobalStyles />
+          <SideMenuProvider>
+            <Component {...pageProps} />
+          </SideMenuProvider>
+        </ThemeProvider>
+      )}
+    </>
   );
 }
 
