@@ -62,3 +62,9 @@ styled-component를 적용하기 위해 작업도 진행하였음(PreviewTemplat
 > - /pages/admin.tsx
 > - /components/mdx/HighlightWrapper.tsx
 > - /templates/\*
+
+### **로그인 영역이 말썽... component가 바뀌질 않음**
+
+https://community.netlify.com/t/user-invitation-through-mail-opens-index-page-instead-of-login-form-asking-a-password/10684/17
+
+nextjs에 대해서는 올라온게 없음...
