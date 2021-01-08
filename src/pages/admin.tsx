@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useEffect } from 'react';
 import PostPreview from '../templates/PostPreview';
 import config from '../../public/config.yml';
@@ -14,7 +15,11 @@ const Admin = () => {
     })();
   }, []);
 
-  return <div />;
+  return (
+    <Head>
+      <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    </Head>
+  );
 };
 
 export default Admin;
