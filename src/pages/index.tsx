@@ -13,7 +13,7 @@ interface Props {
 const IndexPage = ({ categories, posts }: Props) => {
   return (
     <Layout
-      title="Home | Next.js + TypeScript Practice"
+      title="Home"
       sideMenu={<SideMenu categories={categories} posts={posts} />}
     >
       <Home categories={categories} />

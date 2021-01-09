@@ -1,5 +1,4 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import styled from 'styled-components';
 
 import Layout from '../../../components/base/Layout';
 import Title from '../../../components/common/Title';
@@ -19,12 +18,6 @@ interface Props {
   category: CategoryContent;
 }
 
-const SubTitle = styled.h3`
-  margin-top: 0.5rem;
-  text-align: center;
-  color: ${(props) => props.theme.GrayColor.Color700};
-`;
-
 const CategoryPosts = ({
   posts,
   category,
@@ -42,8 +35,7 @@ const CategoryPosts = ({
         />
       }
     >
-      <Title align="center">TIL</Title>
-      <SubTitle>{category.name}</SubTitle>
+      <Title align="center">{category.name}</Title>
       <PostList posts={posts} />
     </Layout>
   );

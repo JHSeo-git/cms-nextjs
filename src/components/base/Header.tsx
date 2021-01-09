@@ -2,16 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { Icon } from '../common/Icon';
-import { BorderLine } from '../../styles/lib/utils';
+import { BorderLine, majorSize } from '../../styles/lib/utils';
 import config from '../../lib/meta/config';
+import responsive from '../../styles/lib/responsive';
 
 const Wrapper = styled.div`
   padding: 0 0.5rem;
   width: 100%;
   border-bottom: ${BorderLine.normal};
+  ${responsive.desktop} {
+    height: ${majorSize.headerHeight};
+    padding: 0 1rem;
+  }
 `;
 
 const Nav = styled.nav`
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;

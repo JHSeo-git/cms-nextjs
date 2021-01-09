@@ -21,8 +21,8 @@ interface Props {
   frontMatter: PostContent;
   categories: CategoryContent[];
   posts: PostContent[];
-  nextSlug: string;
-  prevSlug: string;
+  nextPost: PostContent | null;
+  prevPost: PostContent | null;
 }
 
 const PostIndex = ({
@@ -30,18 +30,18 @@ const PostIndex = ({
   frontMatter,
   categories,
   posts,
-  nextSlug,
-  prevSlug,
+  nextPost,
+  prevPost,
 }: Props) => {
   const hydratedSource = hydrate(source);
   return (
     <>
       <Head>
-        <link rel="next" href={nextSlug} />
-        <link rel="prev" href={prevSlug} />
+        <link rel="next" href={nextPost ? nextPost.slug : ''} />
+        <link rel="prev" href={prevPost ? prevPost.slug : ''} />
       </Head>
       <Layout
-        title={`${frontMatter.title} | Next.js + TypeScript Example`}
+        title={`${frontMatter.title}`}
         sideMenu={
           <SideMenu
             categories={categories}
@@ -53,8 +53,8 @@ const PostIndex = ({
         <Post
           mdxElement={hydratedSource}
           frontMatter={frontMatter}
-          nextSlug={nextSlug}
-          prevSlug={prevSlug}
+          nextPost={nextPost}
+          prevPost={prevPost}
         />
       </Layout>
     </>
@@ -82,18 +82,24 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const categories = listCategories();
   const posts = listPostContent();
-  const targetIdx = posts.findIndex((post) => post.slug === slug);
-  const nextSlug =
-    targetIdx + 1 < posts.length ? posts[targetIdx + 1].slug : '';
-  const prevSlug = targetIdx - 1 > -1 ? posts[targetIdx - 1].slug : '';
+  const targetCategory = posts.find((post) => post.slug === slug)?.category;
+  const postsByCategory = posts.filter(
+    (post) => post.category === targetCategory
+  );
+  const targetIdx = postsByCategory.findIndex((post) => post.slug === slug);
+  const nextPost =
+    targetIdx + 1 < postsByCategory.length
+      ? postsByCategory[targetIdx + 1]
+      : null;
+  const prevPost = targetIdx - 1 > -1 ? postsByCategory[targetIdx - 1] : null;
   return {
     props: {
       source: mdxSource,
       frontMatter: data as PostContent,
       categories,
       posts,
-      nextSlug,
-      prevSlug,
+      nextPost,
+      prevPost,
     },
   };
 };

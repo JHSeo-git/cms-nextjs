@@ -1,6 +1,21 @@
 import 'styled-components';
 
 declare module 'styled-components' {
+  interface MajorSize {
+    headerHeight: string;
+    sideMenuWidth: string;
+  }
+
+  interface ZIndex {
+    default: number;
+    header: number;
+    footer: number;
+    sideMenu: number;
+    modal: number;
+    menu: number;
+    toolTip: number;
+  }
+
   interface ColorPalette {
     Color50?: string;
     Color100?: string;

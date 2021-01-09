@@ -1,14 +1,7 @@
 import React from 'react';
-import styled, { css, keyframes } from 'styled-components';
-
-const fadeIn = keyframes`
-    0%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
-`;
+import styled, { css } from 'styled-components';
+import { fadeIn } from '../../styles/lib/animataion';
+import { zIndexValue } from '../../styles/lib/utils';
 
 type direction =
   | 'top-left'
@@ -43,7 +36,7 @@ interface StyledProps {
 const Content = styled.div<StyledProps>`
   display: none;
   position: absolute;
-  z-index: 9999;
+  z-index: ${zIndexValue.toolTip};
   padding: 0.5rem;
   border-radius: 3px;
 

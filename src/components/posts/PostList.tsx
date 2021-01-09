@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import { PostContent } from '../../lib/meta/posts';
 import PostItem from './PostItem';
 
-const List = styled.ul``;
+const List = styled.ul`
+  padding: 0.5rem 5rem;
+`;
 
 const Item = styled.li`
   &:not(:last-child) {

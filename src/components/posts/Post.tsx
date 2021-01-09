@@ -1,45 +1,65 @@
 import Link from 'next/link';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { PostContent } from '../../lib/meta/posts';
+import responsive from '../../styles/lib/responsive';
+import { BoxShadow } from '../../styles/lib/utils';
 import { Icon } from '../common/Icon';
 import HighlightWrapper from '../mdx/HighlightWrapper';
 
 const Wrapper = styled.section`
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 5rem;
   position: relative;
-  display: flex;
+  ${responsive.tablet} {
+    padding: 0.5rem 1.5rem;
+  }
 `;
 
-const Hovering = styled.div`
-  position: fixed;
-  top: 5rem;
-  right: 3rem;
-  background: white;
-  border: 1px solid black;
-  border-radius: 3px;
+const ButtonWrapper = styled.div`
+  margin-top: 2rem;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
-  padding: 0.5rem;
-  z-index: 10;
 `;
 
 const MoveButton = styled.button`
-  width: 2rem;
-  height: 2rem;
+  flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  opacity: 0.5;
   transition: all 0.2s ease-in-out;
-  svg {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
+  border: 1px solid ${(props) => props.theme.GrayColor.Color100};
+  padding: 1rem;
+  ${BoxShadow(1)};
   &:hover {
-    opacity: 1;
-    transform: scale(1.05);
+    border: 1px solid ${(props) => props.theme.PrimaryColor.Color500};
   }
+
+  & + & {
+    margin-left: 1rem;
+  }
+`;
+
+const MoveButtonContent = styled.div<{ $isFlexEnd?: boolean }>`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  ${(props) =>
+    props.$isFlexEnd &&
+    css`
+      align-items: flex-end;
+    `};
+`;
+
+const MoveButtonLabel = styled.span`
+  font-size: 0.5rem;
+  color: ${(props) => props.theme.GrayColor.Color500};
+`;
+
+const MoveButtonName = styled.span`
+  font-size: 1rem;
+  font-weight: bold;
+  color: ${(props) => props.theme.GrayColor.Color900};
 `;
 
 const Content = styled.article`
@@ -54,33 +74,41 @@ const PostTitle = styled.h1`
 interface Props {
   mdxElement: React.ReactNode;
   frontMatter: PostContent;
-  nextSlug: string;
-  prevSlug: string;
+  nextPost: PostContent | null;
+  prevPost: PostContent | null;
 }
 
-const Post = ({ mdxElement, frontMatter, nextSlug, prevSlug }: Props) => {
+const Post = ({ mdxElement, frontMatter, nextPost, prevPost }: Props) => {
   return (
     <Wrapper>
       <Content>
         <PostTitle>{frontMatter.title}</PostTitle>
         <HighlightWrapper>{mdxElement}</HighlightWrapper>
       </Content>
-      <Hovering>
-        {prevSlug !== '' && (
-          <Link href="/post/[...slug]" as={`/post/${prevSlug}`}>
+      <ButtonWrapper>
+        {prevPost && (
+          <Link href="/post/[...slug]" as={`/post/${prevPost.slug}`}>
             <MoveButton>
               <Icon icon="arrowleft" aria-label="arrowleft" />
+              <MoveButtonContent $isFlexEnd={true}>
+                <MoveButtonLabel>Prev</MoveButtonLabel>
+                <MoveButtonName>{prevPost.title}</MoveButtonName>
+              </MoveButtonContent>
             </MoveButton>
           </Link>
         )}
-        {nextSlug !== '' && (
-          <Link href="/post/[...slug]" as={`/post/${nextSlug}`}>
+        {nextPost && (
+          <Link href="/post/[...slug]" as={`/post/${nextPost.slug}`}>
             <MoveButton>
+              <MoveButtonContent>
+                <MoveButtonLabel>Next</MoveButtonLabel>
+                <MoveButtonName>{nextPost.title}</MoveButtonName>
+              </MoveButtonContent>
               <Icon icon="arrowright" aria-label="arrowright" />
             </MoveButton>
           </Link>
         )}
-      </Hovering>
+      </ButtonWrapper>
     </Wrapper>
   );
 };

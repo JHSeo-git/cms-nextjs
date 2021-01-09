@@ -14,7 +14,7 @@ interface Props {
 
 const Index = ({ categories, posts }: Props) => (
   <Layout
-    title="Posts | Next.js + TypeScript Example"
+    title="Posts"
     sideMenu={<SideMenu categories={categories} posts={posts} />}
   >
     <Title align="center">TIL</Title>

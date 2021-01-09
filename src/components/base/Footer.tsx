@@ -11,6 +11,7 @@ const FooterWrapper = styled.footer`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: white;
 `;
 
 const Text = styled.div`

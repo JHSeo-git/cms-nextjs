@@ -1,4 +1,5 @@
-import { css } from 'styled-components';
+import { EventEmitter } from 'events';
+import { css, MajorSize, ZIndex } from 'styled-components';
 import { Appearance } from '../../interfaces';
 
 export const ApperanceColor = (appearance: Appearance) => {
@@ -86,4 +87,19 @@ export const TextEllipsis = (maxLine = 1) => {
           word-wrap: break-word;
         `}
   `;
+};
+
+export const zIndexValue: ZIndex = {
+  default: 1,
+  header: 200,
+  footer: 200,
+  sideMenu: 100,
+  modal: 500,
+  menu: 900,
+  toolTip: 999,
+};
+
+export const majorSize: MajorSize = {
+  headerHeight: '5rem',
+  sideMenuWidth: '18rem',
 };
