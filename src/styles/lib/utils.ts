@@ -1,4 +1,3 @@
-import { EventEmitter } from 'events';
 import { css, MajorSize, ZIndex } from 'styled-components';
 import { Appearance } from '../../interfaces';
 

@@ -11,7 +11,7 @@ import {
 import storage, { keys } from '../../lib/storage';
 import { useRouter } from 'next/router';
 import responsive from '../../styles/lib/responsive';
-import { downSideAni, fadeIn, upSideAni } from '../../styles/lib/animataion';
+import { downSideAni, upSideAni } from '../../styles/lib/animataion';
 
 const LayoutWrapper = styled.div`
   display: flex;
