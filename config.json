@@ -1,6 +1,6 @@
 {
   "base_url": "https://seo-cms-nextjs.netlify.app",
-  "site_title": "BOOKLOG",
+  "site_title": "NextBook",
   "site_description": "Information for Developer",
   "site_keywords": [
     {
@@ -11,6 +11,12 @@
     },
     {
       "keyword": "React"
+    },
+    {
+      "keyword": "Typescript"
+    },
+    {
+      "keyword": "styled-components"
     }
   ],
   "github_account": "JHSeo-git",
