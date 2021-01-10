@@ -10,7 +10,10 @@ import {
 } from '../../lib/contexts/SideMenuContext';
 import storage, { keys } from '../../lib/storage';
 import { useRouter } from 'next/router';
-import responsive from '../../styles/lib/responsive';
+import responsive, {
+  BreakPoint,
+  isBreakdown,
+} from '../../styles/lib/responsive';
 import { downSideAni, upSideAni } from '../../styles/lib/animataion';
 
 const LayoutWrapper = styled.div`
@@ -50,7 +53,7 @@ const LeftSide = styled.section<StyledProps>`
     left: 0;
     z-index: ${zIndexValue.sideMenu};
 
-    &::after {
+    /* &::after {
       content: '';
       position: fixed;
       top: 0;
@@ -60,11 +63,24 @@ const LeftSide = styled.section<StyledProps>`
       z-index: 10;
       background-color: rgba(0, 0, 0, 0.3);
       ${(props) =>
-        props.$isOpen &&
-        css`
-          animation: ${dimFadeIn} 0.5s ease-in-out;
-        `}
-    }
+      props.$isOpen &&
+      css`
+        animation: ${dimFadeIn} 0.5s ease-in-out;
+      `}
+    } */
+  }
+`;
+
+const LeftOutSide = styled.div`
+  ${responsive.desktop} {
+    position: fixed;
+    top: 0;
+    left: ${majorSize.sideMenuWidth};
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.3);
+    animation: ${dimFadeIn} 0.5s ease-in-out;
   }
 `;
 
@@ -148,7 +164,7 @@ const Layout = ({
     }
   };
 
-  const toggleSideMenu = () => {
+  const initSideMenu = () => {
     if (!storage) return;
     if (!sideMenuDispatch) return;
 
@@ -173,13 +189,24 @@ const Layout = ({
     setPrevTop(ref.current.scrollTop);
   };
 
+  const closeSideMenu = () => {
+    if (!sideMenuDispatch) return;
+
+    sideMenuDispatch({ type: 'CLOSE_SIDE_MENU' });
+  };
+
   useEffect(() => {
-    toggleSideMenu();
+    initSideMenu();
   }, []);
 
   useEffect(() => {
     if (!ref.current) return;
     ref.current.scrollTo(0, 0);
+
+    const breakdownFlag = isBreakdown('width', BreakPoint.desktop);
+    if (breakdownFlag) {
+      closeSideMenu();
+    }
   }, [asPath]);
 
   return (
@@ -193,6 +220,7 @@ const Layout = ({
         {sideMenu && (
           <LeftSide $isOpen={sideMenuState ? sideMenuState.sideMenu : true}>
             {sideMenu}
+            {sideMenuState?.sideMenu && <LeftOutSide onClick={closeSideMenu} />}
           </LeftSide>
         )}
         <RightSide onScroll={handleScroll} ref={ref}>
