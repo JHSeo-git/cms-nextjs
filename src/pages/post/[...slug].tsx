@@ -76,7 +76,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const mdxSource = await renderToString(content, {
     mdxOptions: {
-      rehypePlugins: [require('rehype-highlight')],
+      rehypePlugins: [
+        require('rehype-highlight'),
+        require('rehype-slug'),
+        require('rehype-autolink-headings'),
+        require('rehype-toc'),
+      ],
     },
   });
 

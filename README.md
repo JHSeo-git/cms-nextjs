@@ -73,6 +73,15 @@ https://community.netlify.com/t/user-invitation-through-mail-opens-index-page-in
 custom 하기에는 소스 분석하다가 며칠째 답을 못찾아서
 그냥 위 v1 버전으로 넣어서 동작함
 
+### **responsive**
+
+CSS media query로만 responsive를 구현하려 했는데
+하다보니 code내에서도 respoisve를 체크해야되는 경우가 발생하였다.
+그래서 viewport를 구해서 breakdown되는지 체크하는 함수를 만들어서 useEffect를 통해 확인하는 식으로 구현함
+
+- `styles/lib/responsive.ts`
+- `components/base/Layout.tsx`
+
 # 주절주절
 
 ## concept
@@ -98,3 +107,20 @@ netlify-cms가 간단한 design에 netlify 를 통한 간편함까지 있어서 
 2.  styled-component를 통해 미디어 쿼리를 작성하는 방식이 많긴 한데
     뭐가 더 효율적이고 사용하기 편할까 찾아보는 시간이 더 걸리는 것 같다.
     그냥 막 짜고 나중에 더 좋은 걸 찾으면 적용하는 방식으로 진행해야 될 것 같다.
+
+## CMS
+
+netlify-cms가 적용하기 간편하게 되어있긴 한데 gatsby 영역에서 많이 사용하다보니 reference가 거기 치중되어있었다.
+아주 normal하거나 조금 조미료가 가미된 경우에는 nextjs도 reference가 있긴 했는데 많이 없어서 package 뒤져가면서 찾아댕겼다.
+styled-component 적용하는 것도 어려웠고(단순 markdown 때문에...)
+
+simple한 ui가 맘에 들긴했는데 markdown preview만 어찌 해볼려다가 시간을 많이 잡아먹었다.
+identify page도 고생했었는데 netlify-cms-app 에서 제공되어지는 default login창에서는 oauth 버튼이 나타나질 않아서 헤매다가
+그냥 identify-widget v1을 불러다가 쓰는 방식으로 했다.(휴...)
+
+## Markdown
+
+next에서 제공하는 mdx package 중에서 next-mdx-remote package를 이용해서 preview해서 보여준다.
+다양한 플러그인이 있고 현재 사용되는 rehype remark 를 대부분 사용할 수 있다.
+그 중에서 pre > code 를 syntax highlight 하기 위해서 rehype-highlight
+heading link를 위해서 rehype-slug, rehype-toc를 이용해서 toc를 만들고 link를 걸어주었다.(그냥 해볼까하다가 그냥 적용함)
