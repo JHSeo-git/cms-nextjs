@@ -3,6 +3,7 @@ import { PreviewTemplateComponentProps } from 'netlify-cms-core';
 import styled from 'styled-components';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
+import { MdxRemote } from 'next-mdx-remote/types';
 import matter from 'gray-matter';
 import yaml from 'js-yaml';
 import PreviewTemplate from './PreviewTemplate';
@@ -18,7 +19,7 @@ const Content = styled.div`
   padding: 0.75rem;
 `;
 
-const RenderHydrate = ({ source }: { source: any }) => {
+const RenderHydrate = ({ source }: { source: MdxRemote.Source }) => {
   const body = hydrate(source);
 
   return (
@@ -29,12 +30,13 @@ const RenderHydrate = ({ source }: { source: any }) => {
 };
 
 const PostPreview = (props: PreviewTemplateComponentProps) => {
-  const { entry } = props;
+  const { entry, widgetFor } = props;
   const title = entry.getIn(['data', 'title']);
   // const body = entry.getIn(['data', 'body']);
   const body = entry.getIn(['widgets', 'body']);
+  const bodyWidget = widgetFor('body');
 
-  const [renderBody, setRenderBody] = useState<React.ReactNode | null>(null);
+  const [renderBody, setRenderBody] = useState<MdxRemote.Source | null>(null);
 
   useEffect(() => {
     const styledBody = async (postContent: string) => {
@@ -48,7 +50,7 @@ const PostPreview = (props: PreviewTemplateComponentProps) => {
         },
       });
 
-      const mdxSource = await renderToString(content, {
+      const mdxSource: MdxRemote.Source = await renderToString(content, {
         mdxOptions: {
           rehypePlugins: [require('rehype-highlight')],
         },
@@ -61,7 +63,7 @@ const PostPreview = (props: PreviewTemplateComponentProps) => {
     styledBody(body).then((source) => {
       setRenderBody(source);
     });
-  }, [entry]);
+  }, [bodyWidget]);
 
   return (
     <PreviewTemplate>
