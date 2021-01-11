@@ -61,7 +61,7 @@ const PostPreview = (props: PreviewTemplateComponentProps) => {
     styledBody(body).then((source) => {
       setRenderBody(source);
     });
-  }, [body]);
+  }, [entry]);
 
   return (
     <PreviewTemplate>
