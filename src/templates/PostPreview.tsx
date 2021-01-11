@@ -29,9 +29,10 @@ const RenderHydrate = ({ source }: { source: any }) => {
 };
 
 const PostPreview = (props: PreviewTemplateComponentProps) => {
-  const { entry } = props;
+  const { entry, widgetFor } = props;
   const title = entry.getIn(['data', 'title']);
-  const body = entry.getIn(['data', 'body']);
+  // const body = entry.getIn(['data', 'body']);
+  const body = widgetFor('body');
   const [renderBody, setRenderBody] = useState<React.ReactNode | null>(null);
 
   useEffect(() => {
