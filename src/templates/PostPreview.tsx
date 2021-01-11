@@ -63,7 +63,7 @@ const PostPreview = (props: PreviewTemplateComponentProps) => {
     styledBody(body).then((source) => {
       setRenderBody(source);
     });
-  }, [bodyWidget]);
+  }, [body]);
 
   return (
     <PreviewTemplate>
@@ -71,6 +71,8 @@ const PostPreview = (props: PreviewTemplateComponentProps) => {
         <GlobalStyle />
         <Title>TTitle: {title}</Title>
         {renderBody && <RenderHydrate source={renderBody} />}
+        <Title>Raw WidgetFor</Title>
+        {bodyWidget}
       </>
     </PreviewTemplate>
   );

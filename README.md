@@ -124,3 +124,28 @@ next에서 제공하는 mdx package 중에서 next-mdx-remote package를 이용�
 다양한 플러그인이 있고 현재 사용되는 rehype remark 를 대부분 사용할 수 있다.
 그 중에서 pre > code 를 syntax highlight 하기 위해서 rehype-highlight
 heading link를 위해서 rehype-slug, rehype-toc를 이용해서 toc를 만들고 link를 걸어주었다.(그냥 해볼까하다가 그냥 적용함)
+
+markdown preview 가 live로 반영이 안되네...
+registerPreviewTemplate 하면서 widgetFor를 안가져와서 그런가
+소스 잠깐 뒤져보니
+
+```js
+ /**
+   * Only re-render on value change, but always re-render objects and lists.
+   * Their child widgets will each also be wrapped with this component, and
+   * will only be updated on value change.
+   */
+  shouldComponentUpdate(nextProps) {
+    const isWidgetContainer = ['object', 'list'].includes(nextProps.field.get('widget'));
+    return (
+      isWidgetContainer ||
+      this.props.value !== nextProps.value ||
+      this.props.fieldsMetaData !== nextProps.fieldsMetaData ||
+      this.props.getAsset !== nextProps.getAsset
+    );
+  }
+```
+
+이렇게 되어있어서 widgetFor를 써야만 rerender가 된다는 뜻인가...
+
+## ㅠㅕㅑㅣㅇ
