@@ -29,10 +29,11 @@ const RenderHydrate = ({ source }: { source: any }) => {
 };
 
 const PostPreview = (props: PreviewTemplateComponentProps) => {
-  const { entry, widgetFor } = props;
+  const { entry } = props;
   const title = entry.getIn(['data', 'title']);
   // const body = entry.getIn(['data', 'body']);
-  const body = widgetFor('body');
+  const body = entry.getIn(['widgets', 'body']);
+
   const [renderBody, setRenderBody] = useState<React.ReactNode | null>(null);
 
   useEffect(() => {
@@ -56,10 +57,11 @@ const PostPreview = (props: PreviewTemplateComponentProps) => {
       return mdxSource;
     };
 
+    if (!body) return;
     styledBody(body).then((source) => {
       setRenderBody(source);
     });
-  }, []);
+  }, [body]);
 
   return (
     <PreviewTemplate>
