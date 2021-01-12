@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import { PreviewTemplateComponentProps } from 'netlify-cms-core';
 import styled from 'styled-components';
-import renderToString from 'next-mdx-remote/render-to-string';
-import hydrate from 'next-mdx-remote/hydrate';
-import matter from 'gray-matter';
-import yaml from 'js-yaml';
 import PreviewTemplate from './PreviewTemplate';
-import HighlightWrapper from '../components/mdx/HighlightWrapper';
 import GlobalStyle from '../styles/global-styles';
+import hljs from 'highlight.js';
+import marked from 'marked';
+// import matter from 'gray-matter';
+// import yaml from 'js-yaml';
+// import HighlightWrapper from '../components/mdx/HighlightWrapper';
+
+const HljsWrapper = dynamic(import('../components/mdx/HighlightWrapper'));
 
 const Title = styled.h1`
   text-align: center;
@@ -18,60 +20,33 @@ const Content = styled.div`
   padding: 0.75rem;
 `;
 
-const RenderHydrate = ({ source }: { source: React.ReactNode }) => {
-  const body = hydrate(source);
-
-  return (
-    <HighlightWrapper>
-      <Content>{body}</Content>
-    </HighlightWrapper>
-  );
-};
-
 const PostPreview = (props: PreviewTemplateComponentProps) => {
   const { entry, widgetFor } = props;
   const title = entry.getIn(['data', 'title']);
+
   // const body = entry.getIn(['data', 'body']);
-  const body = entry.getIn(['data', 'body']);
-  const bodyWidget = widgetFor('body');
+  //const body = entry.getIn(['data', 'body']);
+  const body = widgetFor('body')?.props.value;
 
-  const [renderBody, setRenderBody] = useState<React.ReactNode | null>(null);
-
-  useEffect(() => {
-    const styledBody = async (postContent: string) => {
-      const { content } = matter(postContent, {
-        engines: {
-          yaml: (s) =>
-            yaml.safeLoad(s, { schema: yaml.JSON_SCHEMA }) as Record<
-              string,
-              unknown
-            >,
-        },
-      });
-
-      const mdxSource = await renderToString(content, {
-        mdxOptions: {
-          rehypePlugins: [require('rehype-highlight')],
-        },
-      });
-
-      return mdxSource;
-    };
-
-    if (!body) return;
-    styledBody(body).then((source) => {
-      setRenderBody(source);
-    });
-  }, [body]);
+  const renderer = new marked.Renderer();
+  marked.setOptions({
+    highlight: function (code, lang) {
+      return hljs.highlightAuto(code, [lang]).value;
+    },
+    langPrefix: 'hljs',
+    renderer,
+  });
 
   return (
     <PreviewTemplate>
       <>
         <GlobalStyle />
         <Title>TTitle: {title}</Title>
-        {renderBody && <RenderHydrate source={renderBody} />}
-        <Title>Raw WidgetFor</Title>
-        {bodyWidget}
+        <Content>
+          <HljsWrapper>
+            <div dangerouslySetInnerHTML={{ __html: marked(body) }}></div>
+          </HljsWrapper>
+        </Content>
       </>
     </PreviewTemplate>
   );

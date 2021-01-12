@@ -6,10 +6,11 @@ const githubCSS = css`
     github.com style (c) Vasily Polovnyov <vast@whiteants.net>
   */
 
-  .hljs {
+  .hljs,
+  code[class^='hljs'] {
     display: block;
     overflow-x: auto;
-    padding: 0.5em;
+    padding: 1em;
     color: #333;
     background: #f8f8f8;
   }
@@ -123,7 +124,7 @@ const Wrapper = styled.section`
     }
   }
   p {
-    line-height: 1.75;
+    line-height: 2;
     font-weight: 400;
     color: ${(props) => props.theme.GrayColor.Color700};
   }
@@ -185,7 +186,6 @@ const Wrapper = styled.section`
     border: 1px solid ${(props) => props.theme.GrayColor.Color100};
     border-radius: 3px;
     code {
-      padding: 1em;
       font-family: 'Inconsolata', Consolas, 'Ubuntu Mono', monospace;
       font-size: 0.9em;
       line-height: 1.5;

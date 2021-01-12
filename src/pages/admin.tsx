@@ -1,7 +1,10 @@
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import PostPreview from '../templates/PostPreview';
 import config from '../../public/config.yml';
+// import PostPreview from '../templates/PostPreview';
+
+const PostPreview = dynamic(() => import('../templates/PostPreview'));
 
 const Admin = () => {
   const [loading, setLoading] = useState(true);

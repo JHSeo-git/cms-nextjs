@@ -7,7 +7,7 @@ publish_mode: editorial_workflow
 
 site_url: https://seo-cms-nextjs.netlify.app
 
-local_backedn: true
+local_backend: true
 
 collections:
   - name: 'config'
