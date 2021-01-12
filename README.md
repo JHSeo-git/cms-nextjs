@@ -148,4 +148,18 @@ registerPreviewTemplate 하면서 widgetFor를 안가져와서 그런가
 
 이렇게 되어있어서 widgetFor를 써야만 rerender가 된다는 뜻인가...
 
-## ㅠㅕㅑㅣㅇ
+결국 widgetFor를 써야한다.
+widgetFor 내용이 scu에 의해 update되기 때문에 저걸 바라봐야 한다.
+
+그리고 next-mdx-remote를 버리고 marked, hljs로 바꿨다.
+
+따라서,
+site에서 markdown render시에는 next-mdx-remote에서 제공하는 여러 plugin과 함께 사용하고
+cms에서 markdown preview는 marked, hljs로 render하는 방식
+
+## page size
+
+static page를 generated를 하는데 build 시 용량을 체크할 수가 있다.
+admin page가 1.1mb가 넘길래 화들짝 놀라서 알아보니 package가 그대로 static page에 같이 generate 되어서 문제였다.
+dynamic을 이용해 runtime import(dynamic import)를 통해 static page size를 줄일 수 있다는게 있었다.
+그래서 static page size를 줄이기 위해 dynamic from 'next/dynamic'을 이용해서 runtime시에 불러오도록 수정했다.
