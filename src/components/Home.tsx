@@ -9,6 +9,7 @@ import Title from './common/Title';
 
 const Wrapper = styled.div`
   height: 100%;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
