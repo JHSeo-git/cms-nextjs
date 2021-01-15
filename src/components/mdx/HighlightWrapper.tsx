@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { useSideMenu } from '../../lib/contexts/SideMenuContext';
 import responsive from '../../styles/lib/responsive';
+import { zIndexValue } from '../../styles/lib/utils';
 
 const githubCSS = css`
   /*
@@ -103,48 +104,6 @@ const githubCSS = css`
   }
 `;
 
-const tocStyle = css`
-  // nav로 return 되고 className은 toc로 명명되어 있다.
-  nav.toc {
-    position: fixed;
-    top: 50%;
-    right: 0;
-    margin-right: 1rem;
-    transform: translateY(-50%);
-    background: whiteants;
-    padding: 0.5rem;
-    width: 240px;
-    height: 50vh;
-    overflow-y: auto;
-    border-radius: 5px;
-
-    > ol {
-      border-left: 2px solid ${(props) => props.theme.ThirdaryColor.Color500};
-    }
-
-    ol,
-    li {
-      list-style: none;
-      font-size: 0.875rem;
-      line-height: 1.5rem;
-    }
-
-    ol.toc-level {
-      padding-left: 1rem;
-    }
-
-    a {
-      color: ${(props) => props.theme.GrayColor.Color900};
-      opacity: 0.5;
-
-      &:hover {
-        opacity: 1;
-        text-decoration: none;
-      }
-    }
-  }
-`;
-
 const Wrapper = styled.section<{ $isSideMenuOpen: boolean }>`
   text-align: start;
   font-size: 1.125rem;
@@ -153,24 +112,20 @@ const Wrapper = styled.section<{ $isSideMenuOpen: boolean }>`
   font-family: 'Noto Sans KR', sans-serif;
   color: ${(props) => props.theme.GrayColor.Color800};
 
-  /* ${tocStyle}; */
   // nav로 return 되고 className은 toc로 명명되어 있다.
   nav.toc {
     position: fixed;
     top: 50%;
     right: 0;
-    margin-right: 1rem;
     transform: translateY(-50%);
-    background: whiteants;
+    background: white;
     padding: 0.5rem;
-    width: 240px;
+    width: 250px;
     height: 50vh;
     overflow-y: auto;
-    border-radius: 5px;
-
-    > ol {
-      border-left: 2px solid ${(props) => props.theme.ThirdaryColor.Color500};
-    }
+    border-left: 5px solid ${(props) => props.theme.ThirdaryColor.Color500};
+    transition: all 0.2s ease-in-out;
+    z-index: ${zIndexValue.sideMenu};
 
     ol,
     li {
@@ -191,6 +146,9 @@ const Wrapper = styled.section<{ $isSideMenuOpen: boolean }>`
         opacity: 1;
         text-decoration: none;
       }
+    }
+    ${responsive.wideScreen} {
+      opacity: 0;
     }
   }
 

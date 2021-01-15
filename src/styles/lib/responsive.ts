@@ -1,5 +1,5 @@
 export const BreakPoint = {
-  wideScreen: 1366,
+  wideScreen: 1279,
   desktop: 1023,
   tablet: 767,
   phone: 576,
