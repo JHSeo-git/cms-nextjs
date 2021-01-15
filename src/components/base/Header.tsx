@@ -85,7 +85,14 @@ const Header = ({ isSideMenu = true, onSideMenuClick }: Props) => {
             <Icon icon="github" aria-label="github" />
           </Anchor>
           <Button>
-            <Icon icon="bookmarkhollow" aria-label="bookmarkhollow" />
+            <Anchor
+              title="Admin"
+              href={`/admin`}
+              target="_blank"
+              rel="noopener"
+            >
+              <Icon icon="bookmarkhollow" aria-label="bookmarkhollow" />
+            </Anchor>
           </Button>
         </RightSide>
       </Nav>

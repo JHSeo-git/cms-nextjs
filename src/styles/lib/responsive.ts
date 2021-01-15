@@ -1,4 +1,5 @@
 export const BreakPoint = {
+  wideScreen: 1366,
   desktop: 1023,
   tablet: 767,
   phone: 576,
@@ -9,6 +10,7 @@ const customMediaQuery = (maxWidth: number) =>
 
 const responsive = {
   custom: customMediaQuery,
+  wideScreen: customMediaQuery(BreakPoint.wideScreen),
   desktop: customMediaQuery(BreakPoint.desktop),
   tablet: customMediaQuery(BreakPoint.tablet),
   phone: customMediaQuery(BreakPoint.phone),

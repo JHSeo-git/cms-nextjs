@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { useSideMenu } from '../../lib/contexts/SideMenuContext';
 import responsive from '../../styles/lib/responsive';
 
 const githubCSS = css`
@@ -102,13 +103,96 @@ const githubCSS = css`
   }
 `;
 
-const Wrapper = styled.section`
+const tocStyle = css`
+  // nav로 return 되고 className은 toc로 명명되어 있다.
+  nav.toc {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    margin-right: 1rem;
+    transform: translateY(-50%);
+    background: whiteants;
+    padding: 0.5rem;
+    width: 240px;
+    height: 50vh;
+    overflow-y: auto;
+    border-radius: 5px;
+
+    > ol {
+      border-left: 2px solid ${(props) => props.theme.ThirdaryColor.Color500};
+    }
+
+    ol,
+    li {
+      list-style: none;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+    }
+
+    ol.toc-level {
+      padding-left: 1rem;
+    }
+
+    a {
+      color: ${(props) => props.theme.GrayColor.Color900};
+      opacity: 0.5;
+
+      &:hover {
+        opacity: 1;
+        text-decoration: none;
+      }
+    }
+  }
+`;
+
+const Wrapper = styled.section<{ $isSideMenuOpen: boolean }>`
   text-align: start;
   font-size: 1.125rem;
   word-break: break-word;
   word-wrap: break-word;
   font-family: 'Noto Sans KR', sans-serif;
   color: ${(props) => props.theme.GrayColor.Color800};
+
+  /* ${tocStyle}; */
+  // nav로 return 되고 className은 toc로 명명되어 있다.
+  nav.toc {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    margin-right: 1rem;
+    transform: translateY(-50%);
+    background: whiteants;
+    padding: 0.5rem;
+    width: 240px;
+    height: 50vh;
+    overflow-y: auto;
+    border-radius: 5px;
+
+    > ol {
+      border-left: 2px solid ${(props) => props.theme.ThirdaryColor.Color500};
+    }
+
+    ol,
+    li {
+      list-style: none;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+    }
+
+    ol.toc-level {
+      padding-left: 1rem;
+    }
+
+    a {
+      color: ${(props) => props.theme.GrayColor.Color900};
+      opacity: 0.5;
+
+      &:hover {
+        opacity: 1;
+        text-decoration: none;
+      }
+    }
+  }
 
   ${responsive.tablet} {
     font-size: 1rem;
@@ -392,7 +476,12 @@ interface Props {
 }
 
 const HighlightWrapper = ({ children }: Props) => {
-  return <Wrapper>{children}</Wrapper>;
+  const sideMenuState = useSideMenu();
+  return (
+    <Wrapper $isSideMenuOpen={sideMenuState ? sideMenuState.sideMenu : false}>
+      {children}
+    </Wrapper>
+  );
 };
 
 export default HighlightWrapper;

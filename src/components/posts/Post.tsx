@@ -2,15 +2,18 @@ import Link from 'next/link';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { PostContent } from '../../lib/meta/posts';
-import responsive from '../../styles/lib/responsive';
+import responsive, { BreakPoint } from '../../styles/lib/responsive';
 import { BoxShadow } from '../../styles/lib/utils';
 import { Icon } from '../common/Icon';
 import HighlightWrapper from '../mdx/HighlightWrapper';
 
 const Wrapper = styled.section`
+  width: ${`${BreakPoint.tablet}px`};
+  margin: 0 auto;
   padding: 0.5rem 5rem;
   position: relative;
   ${responsive.tablet} {
+    width: 100%;
     padding: 0.5rem 1.5rem;
   }
 `;
