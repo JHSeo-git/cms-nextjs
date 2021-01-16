@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import Head from 'next/head';
 import Header from './Header';

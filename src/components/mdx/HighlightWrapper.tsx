@@ -1,9 +1,8 @@
 import styled, { css } from 'styled-components';
-import { math } from 'polished';
 import { useSideMenu } from '../../lib/contexts/SideMenuContext';
 import { githubCSS } from '../../styles/lib/markdown';
 import responsive, { BreakPoint } from '../../styles/lib/responsive';
-import { majorSize, zIndexValue } from '../../styles/lib/utils';
+import { zIndexValue } from '../../styles/lib/utils';
 
 const Wrapper = styled.section<{ $isSideMenuOpen: boolean }>`
   text-align: start;
