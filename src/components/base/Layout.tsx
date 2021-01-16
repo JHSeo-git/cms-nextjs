@@ -15,6 +15,7 @@ import responsive, {
   isBreakdown,
 } from '../../styles/lib/responsive';
 import { downSideAni, upSideAni } from '../../styles/lib/animataion';
+import useStickyScroll from '../../lib/hook/useStickyScroll';
 
 const LayoutWrapper = styled.div`
   display: flex;
@@ -176,18 +177,21 @@ const Layout = ({
     }
   };
 
-  const [isSticky, setSticky] = useState(false);
-  const [prevTop, setPrevTop] = useState(0);
+  // const [isSticky, setSticky] = useState(false);
+  // const [prevTop, setPrevTop] = useState(0);
+  // const ref = useRef<HTMLElement | null>(null);
+  // const handleScroll = () => {
+  //   if (!ref.current) return;
+  //   if (prevTop < ref.current.scrollTop) {
+  //     setSticky(false);
+  //   } else {
+  //     setSticky(true);
+  //   }
+  //   setPrevTop(ref.current.scrollTop);
+  // };
+
   const ref = useRef<HTMLElement | null>(null);
-  const handleScroll = () => {
-    if (!ref.current) return;
-    if (prevTop < ref.current.scrollTop) {
-      setSticky(false);
-    } else {
-      setSticky(true);
-    }
-    setPrevTop(ref.current.scrollTop);
-  };
+  const [isSticky, handleScroll] = useStickyScroll(ref);
 
   const closeSideMenu = () => {
     if (!sideMenuDispatch) return;
@@ -200,13 +204,13 @@ const Layout = ({
   }, []);
 
   useEffect(() => {
-    if (!ref.current) return;
-    ref.current.scrollTo(0, 0);
-
     const breakdownFlag = isBreakdown('width', BreakPoint.desktop);
     if (breakdownFlag) {
       closeSideMenu();
     }
+
+    if (!ref.current) return;
+    ref.current.scrollTo(0, 0);
   }, [asPath]);
 
   return (

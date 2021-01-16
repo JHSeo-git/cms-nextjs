@@ -10,7 +10,6 @@ import HighlightWrapper from '../mdx/HighlightWrapper';
 const Wrapper = styled.section`
   width: ${`${BreakPoint.tablet}px`};
   margin: 0 auto;
-  padding: 0.5rem 5rem;
   position: relative;
   ${responsive.tablet} {
     width: 100%;
@@ -69,9 +68,12 @@ const Content = styled.article`
   flex: 1;
 `;
 
-const PostTitle = styled.h1`
+const PostTitle = styled.header`
   text-align: center;
-  margin-bottom: 1rem;
+  padding: 2rem 0;
+  margin: 2.5rem 0 5rem;
+  font-size: 3rem;
+  font-weight: bold;
 `;
 
 interface Props {

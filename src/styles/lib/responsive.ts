@@ -1,12 +1,25 @@
+import { majorSize } from './utils';
+import { math } from 'polished';
+
 export const BreakPoint = {
-  wideScreen: 1279,
+  wideScreen: 1365,
   desktop: 1023,
   tablet: 767,
   phone: 576,
 };
+const convertPxToRem = (value: number) => value / 16;
 
-const customMediaQuery = (maxWidth: number) =>
-  `@media (max-width: ${maxWidth}px)`;
+const addCalc = (a: number | string, b: number | string) => {
+  const aValue = typeof a === 'number' ? `${convertPxToRem(a)}rem` : a;
+  const bValue = typeof b === 'number' ? `${convertPxToRem(b)}rem` : b;
+  return math(`${aValue} + ${bValue}`);
+};
+
+const customMediaQuery = (maxWidth: number, isSideOpen = false) => {
+  return isSideOpen
+    ? `@media (max-width: ${addCalc(maxWidth, majorSize.sideMenuWidth)})`
+    : `@media (max-width: ${maxWidth}px)`;
+};
 
 const responsive = {
   custom: customMediaQuery,
