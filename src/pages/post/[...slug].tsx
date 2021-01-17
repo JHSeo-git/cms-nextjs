@@ -4,6 +4,8 @@ import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
 import matter from 'gray-matter';
 import yaml from 'js-yaml';
+import rehypeToc from 'rehype-toc';
+import type { Options } from 'rehype-toc';
 
 import {
   getAllPostSlugs,
@@ -80,7 +82,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         require('rehype-highlight'),
         require('rehype-slug'),
         require('rehype-autolink-headings'),
-        require('rehype-toc'),
+        // require('rehype-toc'),
+        [
+          rehypeToc,
+          {
+            headings: ['h1', 'h2', 'h3', 'h4'],
+          } as Options,
+        ],
       ],
     },
   });

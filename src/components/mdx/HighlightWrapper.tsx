@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { useSideMenu } from '../../lib/contexts/SideMenuContext';
 import { githubCSS } from '../../styles/lib/markdown';
 import responsive, { BreakPoint } from '../../styles/lib/responsive';
-import { zIndexValue } from '../../styles/lib/utils';
+import { majorSize, zIndexValue } from '../../styles/lib/utils';
 
 const Wrapper = styled.section<{ $isSideMenuOpen: boolean }>`
   text-align: start;
@@ -15,18 +15,16 @@ const Wrapper = styled.section<{ $isSideMenuOpen: boolean }>`
 
   // nav로 return 되고 className은 toc로 명명되어 있다.
   nav.toc {
-    position: absolute;
-    top: 0;
+    position: sticky;
+    top: ${majorSize.headerHeight};
     left: 100%;
     background: white;
-    padding: 0.5rem;
-    padding-right: 1rem;
-    margin-left: 1rem;
     width: 270px;
-    height: 50vh;
-    overflow-y: auto;
-    border-left: 3px solid ${(props) => props.theme.ThirdaryColor.Color500};
+    height: 0;
+    overflow-y: visible;
+
     transition: all 0.2s ease-in-out;
+    transform: translateX(calc(100% + 2rem));
     z-index: ${zIndexValue.sideMenu};
 
     ol,
@@ -36,8 +34,20 @@ const Wrapper = styled.section<{ $isSideMenuOpen: boolean }>`
       line-height: 1.5rem;
     }
 
-    ol.toc-level {
-      padding-left: 1rem;
+    ol {
+      &.toc-level {
+        padding-left: 1rem;
+
+        &.toc-level-1 {
+          max-height: 50vh;
+          padding-right: 1rem;
+          padding-left: 1rem;
+          max-height: 70vh;
+          overflow-y: auto;
+          border-left: 3px solid
+            ${(props) => props.theme.ThirdaryColor.Color500};
+        }
+      }
     }
 
     a {
