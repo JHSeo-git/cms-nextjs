@@ -157,6 +157,22 @@ widgetFor 내용이 scu에 의해 update되기 때문에 저걸 바라봐야 한
 site에서 markdown render시에는 next-mdx-remote에서 제공하는 여러 plugin과 함께 사용하고
 cms에서 markdown preview는 marked, hljs로 render하는 방식
 
+toc를 rehype-toc로 plugin 해서 쓰는데 option을 넣으려고 했는데
+require 로 쓰다가 import로 바꿨다.
+doc상에서는 getStaticProps에서 top-level module을 써도 client단에서는 build되지 않으니
+이렇게 바꿔서, options를 넣어줬다. require를 쓰더라도 문제는 없어보이는데 type을 가져오기 위해 import 했다
+
+문제는 toc를 가져오는데 content와 같은 level에 nav tag를 가진 element로 반환된다.
+page상에서 fixed로 보여주고 싶었는데 style 작업을 하다보니 고정되어있는 nav를 바꿔서 작업하는게 편했을 텐데
+하고 이것저것 찾아봤는데 마땅히 쓸 option이 없었다.
+(그 중에서 position이라는 옵션이 있었는데 insertAdjacentElement() 를 쓰는 render함수였는데
+동작이 잘 안되는건지...이해를 잘 못한건지 beforebegin을 쓰고 싶었는데 <main> or <body>에 적용된다는데
+plugin으로 쓰면 적용이 안되는건지 아니면 html render되면서 안되는건지 source를 보아도 잘 적용이 안되었다.)
+그래서 css로만 fixed(나중엔 sticky로 적용함) style을 처리하였다.
+
+heading값도 h1,h2,h3,h4까지만 가져오도록 option 설정을 해놓았다.
+option을 어찌 잘 쓰면 더 깔끔하게 적용할 수 있을 것 같은데... 아쉽네
+
 ## page size
 
 static page를 generated를 하는데 build 시 용량을 체크할 수가 있다.
