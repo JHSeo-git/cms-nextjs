@@ -166,7 +166,7 @@ doc상에서는 getStaticProps에서 top-level module을 써도 client단에서�
 page상에서 fixed로 보여주고 싶었는데 style 작업을 하다보니 고정되어있는 nav를 바꿔서 작업하는게 편했을 텐데
 하고 이것저것 찾아봤는데 마땅히 쓸 option이 없었다.
 (그 중에서 position이라는 옵션이 있었는데 insertAdjacentElement() 를 쓰는 render함수였는데
-동작이 잘 안되는건지...이해를 잘 못한건지 beforebegin을 쓰고 싶었는데 <main> or <body>에 적용된다는데
+동작이 잘 안되는건지...이해를 잘 못한건지 beforebegin을 쓰고 싶었는데 `<main>` or `<body>`에 적용된다는데
 plugin으로 쓰면 적용이 안되는건지 아니면 html render되면서 안되는건지 source를 보아도 잘 적용이 안되었다.)
 그래서 css로만 fixed(나중엔 sticky로 적용함) style을 처리하였다.
 
