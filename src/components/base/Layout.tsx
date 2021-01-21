@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import Head from 'next/head';
 import Header from './Header';
@@ -8,6 +8,7 @@ import {
   useDispatchSideMenu,
   useSideMenu,
 } from '../../lib/contexts/SideMenuContext';
+import { useTOC, useDispatchTOC } from '../../lib/contexts/TOCContext';
 import storage, { keys } from '../../lib/storage';
 import { useRouter } from 'next/router';
 import responsive, {
@@ -16,6 +17,7 @@ import responsive, {
 } from '../../styles/lib/responsive';
 import { downSideAni, upSideAni } from '../../styles/lib/animataion';
 import useStickyScroll from '../../lib/hook/useStickyScroll';
+import useTOCItemList from '../../lib/hook/useTOCItemList';
 
 const LayoutWrapper = styled.div`
   display: flex;
@@ -151,8 +153,8 @@ const Layout = ({
 }: Props) => {
   const sideMenuState = useSideMenu();
   const sideMenuDispatch = useDispatchSideMenu();
+  const tocDispatch = useDispatchTOC();
   const { asPath } = useRouter();
-
   const onSideMenuClick = () => {
     if (!sideMenuState || !sideMenuDispatch) return;
 
@@ -177,26 +179,32 @@ const Layout = ({
     }
   };
 
-  // const [isSticky, setSticky] = useState(false);
-  // const [prevTop, setPrevTop] = useState(0);
-  // const ref = useRef<HTMLElement | null>(null);
-  // const handleScroll = () => {
-  //   if (!ref.current) return;
-  //   if (prevTop < ref.current.scrollTop) {
-  //     setSticky(false);
-  //   } else {
-  //     setSticky(true);
-  //   }
-  //   setPrevTop(ref.current.scrollTop);
-  // };
-
   const ref = useRef<HTMLElement | null>(null);
   const [isSticky, handleScroll] = useStickyScroll(ref);
 
+  const [tocMap] = useTOCItemList();
   const closeSideMenu = () => {
     if (!sideMenuDispatch) return;
 
     sideMenuDispatch({ type: 'CLOSE_SIDE_MENU' });
+  };
+
+  const [currentHeading, setCurrentHeading] = useState('');
+  const handleScrollTOC = () => {
+    if (!tocMap) return;
+    if (!document.body) return;
+    if (!ref?.current) return;
+    for (let i = tocMap.length - 1; i >= 0; i--) {
+      const pos = tocMap[i];
+      // console.log(pos);
+      if (pos.top < ref.current.scrollTop) {
+        if (pos.id === currentHeading) return;
+        setCurrentHeading(pos.id);
+        if (!tocDispatch) return;
+        tocDispatch({ type: 'SET_TOC_ID', payload: pos.id });
+        return;
+      }
+    }
   };
 
   useEffect(() => {
@@ -204,6 +212,11 @@ const Layout = ({
   }, []);
 
   useEffect(() => {
+    const hashFromUrl = asPath.match(/#([a-z0-9]+[-]*[a-z0-9]+)/gi)?.toString();
+    if (tocDispatch && hashFromUrl) {
+      tocDispatch({ type: 'SET_TOC_ID', payload: hashFromUrl });
+    }
+
     const breakdownFlag = isBreakdown('width', BreakPoint.desktop);
     if (breakdownFlag) {
       closeSideMenu();
@@ -227,7 +240,13 @@ const Layout = ({
             {sideMenuState?.sideMenu && <LeftOutSide onClick={closeSideMenu} />}
           </LeftSide>
         )}
-        <RightSide onScroll={handleScroll} ref={ref}>
+        <RightSide
+          onScroll={() => {
+            handleScroll();
+            handleScrollTOC();
+          }}
+          ref={ref}
+        >
           <HeaderWrapper $isSticky={isSticky}>
             <Header
               isSideMenu={sideMenu ? true : false}

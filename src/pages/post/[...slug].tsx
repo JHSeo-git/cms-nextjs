@@ -17,6 +17,7 @@ import Layout from '../../components/base/Layout';
 import Post from '../../components/posts/Post';
 import SideMenu from '../../components/base/SideMenu';
 import { CategoryContent, listCategories } from '../../lib/meta/categories';
+import { TOCProvider } from '../../lib/contexts/TOCContext';
 
 interface Props {
   source: string;
@@ -42,23 +43,25 @@ const PostIndex = ({
         <link rel="next" href={nextPost ? nextPost.slug : ''} />
         <link rel="prev" href={prevPost ? prevPost.slug : ''} />
       </Head>
-      <Layout
-        title={`${frontMatter.title}`}
-        sideMenu={
-          <SideMenu
-            categories={categories}
-            posts={posts}
-            currentCategory={frontMatter.category}
+      <TOCProvider>
+        <Layout
+          title={`${frontMatter.title}`}
+          sideMenu={
+            <SideMenu
+              categories={categories}
+              posts={posts}
+              currentCategory={frontMatter.category}
+            />
+          }
+        >
+          <Post
+            mdxElement={hydratedSource}
+            frontMatter={frontMatter}
+            nextPost={nextPost}
+            prevPost={prevPost}
           />
-        }
-      >
-        <Post
-          mdxElement={hydratedSource}
-          frontMatter={frontMatter}
-          nextPost={nextPost}
-          prevPost={prevPost}
-        />
-      </Layout>
+        </Layout>
+      </TOCProvider>
     </>
   );
 };
