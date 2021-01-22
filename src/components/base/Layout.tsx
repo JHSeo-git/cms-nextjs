@@ -8,7 +8,7 @@ import {
   useDispatchSideMenu,
   useSideMenu,
 } from '../../lib/contexts/SideMenuContext';
-import { useTOC, useDispatchTOC } from '../../lib/contexts/TOCContext';
+import { useDispatchTOC } from '../../lib/contexts/TOCContext';
 import storage, { keys } from '../../lib/storage';
 import { useRouter } from 'next/router';
 import responsive, {
@@ -182,7 +182,8 @@ const Layout = ({
   const ref = useRef<HTMLElement | null>(null);
   const [isSticky, handleScroll] = useStickyScroll(ref);
 
-  const [tocMap] = useTOCItemList();
+  const [tocMap] = useTOCItemList(ref);
+
   const closeSideMenu = () => {
     if (!sideMenuDispatch) return;
 
@@ -212,7 +213,10 @@ const Layout = ({
   }, []);
 
   useEffect(() => {
-    const hashFromUrl = asPath.match(/#([a-z0-9]+[-]*[a-z0-9]+)/gi)?.toString();
+    console.log('rerender');
+    const hashFromUrl = asPath
+      .match(/#([a-z0-9]+(?:-[a-z0-9]+)*)/gi)
+      ?.toString();
     if (tocDispatch && hashFromUrl) {
       tocDispatch({ type: 'SET_TOC_ID', payload: hashFromUrl });
     }

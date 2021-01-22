@@ -1,10 +1,16 @@
 import styled, { css } from 'styled-components';
 import { useSideMenu } from '../../lib/contexts/SideMenuContext';
+import { useTOC } from '../../lib/contexts/TOCContext';
 import { githubCSS } from '../../styles/lib/markdown';
 import responsive, { BreakPoint } from '../../styles/lib/responsive';
 import { majorSize, zIndexValue } from '../../styles/lib/utils';
 
-const Wrapper = styled.section<{ $isSideMenuOpen: boolean }>`
+interface StyledProps {
+  $isSideMenuOpen: boolean;
+  $currentTOCId: string;
+}
+
+const Wrapper = styled.section<StyledProps>`
   text-align: start;
   font-size: 1.125rem;
   word-break: break-word;
@@ -51,12 +57,19 @@ const Wrapper = styled.section<{ $isSideMenuOpen: boolean }>`
     }
 
     a {
+      display: inline-block;
       color: ${(props) => props.theme.GrayColor.Color900};
       opacity: 0.5;
+      transition: all 0.2s ease-in-out;
 
       &:hover {
         opacity: 1;
         text-decoration: none;
+      }
+
+      &[href='${(props) => props.$currentTOCId}'] {
+        transform: scale(1.1);
+        opacity: 1;
       }
     }
 
@@ -361,8 +374,12 @@ interface Props {
 
 const HighlightWrapper = ({ children }: Props) => {
   const sideMenuState = useSideMenu();
+  const currentTOC = useTOC();
   return (
-    <Wrapper $isSideMenuOpen={sideMenuState ? sideMenuState.sideMenu : false}>
+    <Wrapper
+      $isSideMenuOpen={sideMenuState ? sideMenuState.sideMenu : false}
+      $currentTOCId={currentTOC?.tocId ? currentTOC.tocId : ''}
+    >
       {children}
     </Wrapper>
   );

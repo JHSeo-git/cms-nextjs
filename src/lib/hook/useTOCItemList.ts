@@ -6,17 +6,17 @@ interface TOCItem {
   top: number;
 }
 
-const useTOCItemList = () => {
-  const [scrollTop, setScrollTop] = useState(0);
+const useTOCItemList = (ref: React.MutableRefObject<HTMLElement | null>) => {
   const [list, setList] = useState<TOCItem[] | null>(null);
 
   const handler = debounce(() => {
+    if (!ref?.current) return;
     const toc = document.querySelector('.toc');
-    console.log('tttt', scrollTop);
     if (toc) {
       const anchorList = [
         ...toc.querySelectorAll<HTMLAnchorElement>('.toc-link'),
       ];
+      const scrollTop = ref.current.scrollTop;
       setList(
         anchorList.map((anchor) => {
           const id = anchor.hash;
@@ -38,11 +38,6 @@ const useTOCItemList = () => {
   }, 20);
 
   useEffect(() => {
-    if (!document.body) return;
-    const temp = document.documentElement
-      ? document.documentElement.scrollTop || document.body.scrollTop
-      : document.body.scrollTop;
-    setScrollTop(temp || 0);
     window.addEventListener('DOMContentLoaded', handler, false);
     window.addEventListener('load', handler, false);
     window.addEventListener('scroll', handler, false);
