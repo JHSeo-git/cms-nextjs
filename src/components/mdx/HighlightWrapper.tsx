@@ -60,7 +60,7 @@ const Wrapper = styled.section<StyledProps>`
       display: inline-block;
       color: ${(props) => props.theme.GrayColor.Color900};
       opacity: 0.5;
-      transition: all 0.2s ease-in-out;
+      transition: all 0.1s ease-in-out;
 
       &:hover {
         opacity: 1;

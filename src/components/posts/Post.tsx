@@ -3,7 +3,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { PostContent } from '../../lib/meta/posts';
 import responsive, { BreakPoint } from '../../styles/lib/responsive';
-import { BoxShadow } from '../../styles/lib/utils';
 import { Icon } from '../common/Icon';
 import HighlightWrapper from '../mdx/HighlightWrapper';
 
@@ -30,9 +29,9 @@ const MoveButton = styled.button`
   justify-content: space-between;
   align-items: center;
   transition: all 0.2s ease-in-out;
-  border: 1px solid ${(props) => props.theme.GrayColor.Color100};
+  border: 1px solid ${(props) => props.theme.GrayColor.Color300};
+  border-radius: 3px;
   padding: 1rem;
-  ${BoxShadow(1)};
   &:hover {
     border: 1px solid ${(props) => props.theme.PrimaryColor.Color500};
   }

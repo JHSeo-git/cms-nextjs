@@ -155,17 +155,6 @@ const Layout = ({
   const sideMenuDispatch = useDispatchSideMenu();
   const tocDispatch = useDispatchTOC();
   const { asPath } = useRouter();
-  const onSideMenuClick = () => {
-    if (!sideMenuState || !sideMenuDispatch) return;
-
-    if (sideMenuState.sideMenu) {
-      sideMenuDispatch({ type: 'CLOSE_SIDE_MENU' });
-      storage.set(keys.sideMenu, false);
-    } else {
-      sideMenuDispatch({ type: 'OPEN_SIDE_MENU' });
-      storage.set(keys.sideMenu, true);
-    }
-  };
 
   const initSideMenu = () => {
     if (!storage) return;
@@ -179,10 +168,17 @@ const Layout = ({
     }
   };
 
-  const ref = useRef<HTMLElement | null>(null);
-  const [isSticky, handleScroll] = useStickyScroll(ref);
+  const onSideMenuClick = () => {
+    if (!sideMenuState || !sideMenuDispatch) return;
 
-  const [tocMap] = useTOCItemList(ref);
+    if (sideMenuState.sideMenu) {
+      sideMenuDispatch({ type: 'CLOSE_SIDE_MENU' });
+      storage.set(keys.sideMenu, false);
+    } else {
+      sideMenuDispatch({ type: 'OPEN_SIDE_MENU' });
+      storage.set(keys.sideMenu, true);
+    }
+  };
 
   const closeSideMenu = () => {
     if (!sideMenuDispatch) return;
@@ -190,15 +186,18 @@ const Layout = ({
     sideMenuDispatch({ type: 'CLOSE_SIDE_MENU' });
   };
 
+  const ref = useRef<HTMLElement | null>(null);
+  const [isSticky, handleScroll] = useStickyScroll(ref);
+
+  const [tocMap] = useTOCItemList(ref);
+
   const [currentHeading, setCurrentHeading] = useState('');
   const handleScrollTOC = () => {
     if (!tocMap) return;
-    if (!document.body) return;
     if (!ref?.current) return;
     for (let i = tocMap.length - 1; i >= 0; i--) {
       const pos = tocMap[i];
-      // console.log(pos);
-      if (pos.top < ref.current.scrollTop) {
+      if (pos.top <= ref.current.scrollTop + 1) {
         if (pos.id === currentHeading) return;
         setCurrentHeading(pos.id);
         if (!tocDispatch) return;
