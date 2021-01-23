@@ -2,6 +2,7 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import config from '../../public/config.yml';
+import LoadingBar from '../components/common/LoadingBar';
 // import PostPreview from '../templates/PostPreview';
 
 const PostPreview = dynamic(() => import('../templates/PostPreview'));
@@ -24,7 +25,7 @@ const Admin = () => {
   return (
     <>
       {loading ? (
-        <div>Loading</div>
+        <LoadingBar />
       ) : (
         <Head>
           <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>

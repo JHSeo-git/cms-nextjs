@@ -39,7 +39,8 @@
     "next": "latest",
     "next-mdx-remote": "^2.0.1",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "react-spinners": "^0.10.4"
   },
   "devDependencies": {
     "@types/marked": "^1.2.1",
