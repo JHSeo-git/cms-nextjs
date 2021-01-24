@@ -42,7 +42,6 @@ collections:
           - label: 'GitHub account'
             name: 'github_account'
             widget: 'string'
-
   - name: 'meta'
     label: 'Meta'
     delete: false
@@ -117,6 +116,13 @@ collections:
     identifier_field: slug
     summary: '[{{category}}] {{title}}'
     sortable_fields: ['category', 'title', 'date', 'author']
+    view_filters:
+      - label: 'Javascript'
+        field: 'category'
+        pattern: 'javascript'
+      - label: 'Typescript'
+        field: 'category'
+        pattern: 'typescript'
     view_groups:
       - label: 'Category'
         field: category
